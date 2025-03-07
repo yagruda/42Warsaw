@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../Example Code"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"get_next_line.h": "c",
+			"fcntl.h": "c"
+		}
+	}
+}
