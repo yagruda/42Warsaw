@@ -1,25 +1,46 @@
-NAME = fractol.a
+# Executable name
+NAME	=	Fractol
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
+# Source files (add your files from src/ here)
+SRC	= \
+	main.c \
+	pixel_control.c \
+	fractal_control.c \
+	handle_control.c \
 
-SRCS = $(wildcard *.c)
+# .c to .o compilation
+OBJ	=	$(SRC:.c=.o)
 
-OBJS = $(SRCS:.c=.o)
+# compilation flags
+CFLAGS	=	-Wall -Werror -Wextra -I./include
 
-all: $(NAME)
+# Included Libraries flags
+MLX_FLAGS	=	-Lminilibx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+LIBFT_FLAGS = -LLibft -lft 
+PRINTF_FLAGS = -Lprintf -lftprintf
 
-$(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+# Path to Included Libraries
+MLX_PATH = ./minilibx
+LIBFT_PATH = ./Libft
+PRINTF_PATH = ./printf
+
+
+# Rules (no relink)
+$(NAME):	$(OBJ) $(OBJ_MAIN) 
+	make -C $(MLX_PATH)
+	make -C $(LIBFT_PATH)
+	make -C $(PRINTF_PATH)
+	cc -o $(NAME) $(OBJ) $(CFLAGS) $(MLX_FLAGS) $(LIBFT_FLAGS) $(PRINTF_FLAGS)
+
+all:	$(NAME)
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJ)
 
-fclean: clean
-	rm -f $(NAME)
+fclean:	clean
+	rm -rf $(NAME)
 
-re: fclean all
+re:	fclean all
 
+.PHONY : all clean fclean re
