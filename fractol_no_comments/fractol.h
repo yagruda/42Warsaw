@@ -14,8 +14,7 @@
 # define FRACTOL_H
 
 #include "minilibx/mlx.h"
-#include "Libft/libft.h"
-#include "printf/ft_printf.h"
+#include "libftprintf/ft_printf.h"
 #include <stdlib.h>
 
 # define KEY_ESC 53

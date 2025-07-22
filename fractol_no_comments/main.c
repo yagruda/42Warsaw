@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 18:21:23 by yhruda            #+#    #+#             */
-/*   Updated: 2025/07/21 11:35:57 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/07/22 13:27:29 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int check_args(int ac, char **av)
     if((ac == 2 && !ft_strncmp(av[1], "mandelbrot", 10)) ||
        (ac == 2 && !ft_strncmp(av[1], "julia", 5)))
     {
-        ft_printf("Hey you choosed mandelbrot or julia set!\n");
         return (0);
     }
     ft_printf("You have to provide a valid parameter from a list:\n");
