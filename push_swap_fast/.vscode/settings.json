@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"push_swap.h": "c",
+		"ft_printf.h": "c",
+		"libft.h": "c"
+	},
+	"makefile.configureOnOpen": false
+}
