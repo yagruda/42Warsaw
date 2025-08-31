@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"ft_printf.h": "c",
-		"vector": "c",
-		"stdio.h": "c",
-		"bitset": "c",
-		"libft.h": "c"
-	}
-}
