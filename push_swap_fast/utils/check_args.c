@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
+/*   By: yhruda <yhruda@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/26 16:55:31 by yhruda            #+#    #+#             */
-/*   Updated: 2025/08/26 16:55:34 by yhruda           ###   ########.fr       */
+/*   Created: 2025/03/14 16:04:01 by yhruda          #+#    #+#             */
+/*   Updated: 2025/09/01 12:45:37 by yhruda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 static int	ft_contains(int num, char **argv, int i)
 {
@@ -40,11 +40,11 @@ static int	ft_isnum(char *num)
 	return (1);
 }
 
-void	ft_check_args(int argc, char **argv)
+void	ft_check_args(int argc, char **argv, t_set *set)
 {
 	int		i;
 	long	tmp;
-	char	**args;	
+	char	**args;
 
 	i = 0;
 	if (argc == 2)
@@ -58,13 +58,13 @@ void	ft_check_args(int argc, char **argv)
 	{
 		tmp = ft_atoi(args[i]);
 		if (!ft_isnum(args[i]))
-			ft_error("Error");
-		if (ft_contains(tmp, args, i))
-			ft_error("Error");
+			error(set);
 		if (tmp < -2147483648 || tmp > 2147483647)
-			ft_error("Error");
+			error(set);
+		if (ft_contains(tmp, args, i))
+			error(set);
 		i++;
 	}
 	if (argc == 2)
-		ft_free(args);
+		free_args(args);
 }

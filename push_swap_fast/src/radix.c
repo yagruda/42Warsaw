@@ -3,22 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   radix.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
+/*   By: yhruda <yhruda@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/26 16:55:15 by yhruda            #+#    #+#             */
-/*   Updated: 2025/08/26 16:55:16 by yhruda           ###   ########.fr       */
+/*   Created: 2025/03/14 16:00:56 by yhruda          #+#    #+#             */
+/*   Updated: 2025/09/01 12:45:38 by yhruda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
-static int	get_max_bits(t_list **stack)
+static int	get_max_bits(t_stack *stack)
 {
-	t_list	*head;
+	t_node	*head;
 	int		max;
 	int		max_bits;
 
-	head = *stack;
+	head = stack->top;
+	if (!head)
+		return (0);
 	max = head->index;
 	max_bits = 0;
 	while (head)
@@ -32,31 +34,30 @@ static int	get_max_bits(t_list **stack)
 	return (max_bits);
 }
 
-void	radix_sort(t_list **stack_a, t_list **stack_b)
+void	radix_sort(t_set *set)
 {
-	t_list	*head_a;
+	t_node	*head_a;
 	int		i;
 	int		j;
 	int		size;
 	int		max_bits;
 
 	i = 0;
-	head_a = *stack_a;
-	size = ft_lstsize(head_a);
-	max_bits = get_max_bits(stack_a);
+	size = stack_size(set->a);
+	max_bits = get_max_bits(set->a);
 	while (i < max_bits)
 	{
 		j = 0;
 		while (j++ < size)
 		{
-			head_a = *stack_a;
+			head_a = set->a->top;
 			if (((head_a->index >> i) & 1) == 1)
-				ra(stack_a);
+				ra(set);
 			else
-				pb(stack_a, stack_b);
+				pb(set);
 		}
-		while (ft_lstsize(*stack_b) != 0)
-			pa(stack_a, stack_b);
+		while (stack_size(set->b) != 0)
+			pa(set);
 		i++;
 	}
 }

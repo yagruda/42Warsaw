@@ -3,75 +3,119 @@
 /*                                                        :::      ::::::::   */
 /*   simple.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
+/*   By: yhruda <yhruda@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/26 16:55:19 by yhruda            #+#    #+#             */
-/*   Updated: 2025/08/26 17:20:42 by yhruda           ###   ########.fr       */
+/*   Created: 2025/03/17 16:18:34 by yhruda          #+#    #+#             */
+/*   Updated: 2025/09/01 12:45:37 by yhruda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
-int	get_min(t_list **stack, int val)
+static void	handle_min_case(t_set *set, t_node *head, int next_min)
 {
-    t_list	*head;
-    int		min;
-
-    head = *stack;
-    min = head->index;
-    while (head->next)
-    {
-        head = head->next;
-        if ((head->index < min) && head->index != val)
-            min = head->index;
-    }
-    return (min);
+	if (head->index == next_min)
+	{
+		if (head->next->index == next_min)
+			sa(set);
+		else
+			rra(set);
+	}
+	else
+	{
+		if (head->next->index == next_min)
+			ra(set);
+		else
+		{
+			sa(set);
+			rra(set);
+		}
+	}
 }
 
-static void	handle_max_top(t_list **stack_a, int min)
+static void	sort_3(t_set *set)
 {
-    if ((*stack_a)->next->index == min)
-        ra(stack_a);
-    else
-    {
-        sa(stack_a);
-        rra(stack_a);
-    }
+	t_node	*head;
+	int		min;
+	int		next_min;
+
+	head = set->a->top;
+	min = get_min(set->a, -1);
+	next_min = get_min(set->a, min);
+	if (is_sorted(set->a))
+		return ;
+	if (head->index == min && head->next->index != next_min)
+	{
+		ra(set);
+		sa(set);
+		rra(set);
+	}
+	else
+		handle_min_case(set, head, next_min);
 }
 
-static void	handle_next_min_top(t_list **stack_a, int min)
+static void	sort_4(t_set *set)
 {
-    if ((*stack_a)->next->index == min)
-        sa(stack_a);
-    else
-        rra(stack_a);
+	int	distance;
+
+	if (is_sorted(set->a))
+		return ;
+	distance = get_distance(set->a->top, get_min(set->a, -1));
+	if (distance == 1)
+		ra(set);
+	else if (distance == 2)
+	{
+		ra(set);
+		ra(set);
+	}
+	else if (distance == 3)
+		rra(set);
+	if (is_sorted(set->a))
+		return ;
+	pb(set);
+	sort_3(set);
+	pa(set);
 }
 
-static void	sort_3_handler(t_list **stack_a, int min, int next_min)
+void	sort_5(t_set *set)
 {
-    t_list	*head;
+	int	distance;
 
-    head = *stack_a;
-    if (head->index == min)
-    {
-        ra(stack_a);
-        sa(stack_a);
-        rra(stack_a);
-    }
-    else if (head->index == next_min)
-        handle_next_min_top(stack_a, min);
-    else
-        handle_max_top(stack_a, min);
+	distance = get_distance(set->a->top, get_min(set->a, -1));
+	if (distance == 1)
+		ra(set);
+	else if (distance == 2)
+	{
+		ra(set);
+		ra(set);
+	}
+	else if (distance == 3)
+	{
+		rra(set);
+		rra(set);
+	}
+	else if (distance == 4)
+		rra(set);
+	if (is_sorted(set->a))
+		return ;
+	pb(set);
+	sort_4(set);
+	pa(set);
 }
 
-void	sort_3(t_list **stack_a)
+void	simple_sort(t_set *set)
 {
-    int		min;
-    int		next_min;
+	int	size;
 
-    if (is_sorted(stack_a))
-        return ;
-    min = get_min(stack_a, -1);
-    next_min = get_min(stack_a, min);
-    sort_3_handler(stack_a, min, next_min);
+	if (is_sorted(set->a) || stack_size(set->a) == 0 || stack_size(set->a) == 1)
+		return ;
+	size = stack_size(set->a);
+	if (size == 2)
+		sa(set);
+	else if (size == 3)
+		sort_3(set);
+	else if (size == 4)
+		sort_4(set);
+	else if (size == 5)
+		sort_5(set);
 }

@@ -3,53 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
+/*   By: yhruda <yhruda@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/26 16:55:49 by yhruda            #+#    #+#             */
-/*   Updated: 2025/08/26 16:55:51 by yhruda           ###   ########.fr       */
+/*   Created: 2025/03/14 16:05:48 by yhruda          #+#    #+#             */
+/*   Updated: 2025/09/01 12:45:37 by yhruda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
-void	ft_error(char *msg)
+// Helper function: Count nodes in a stack
+int	stack_size(t_stack *stack)
 {
-	ft_putendl_fd(msg, 1);
-	exit(0);
-}
+	int		count;
+	t_node	*curr;
 
-void	ft_free(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	while (i >= 0)
-		free(str[i--]);
-}
-
-int	is_sorted(t_list **stack)
-{
-	t_list	*head;
-
-	head = *stack;
-	while (head && head->next)
+	count = 0;
+	curr = stack->top;
+	while (curr)
 	{
-		if (head->value > head->next->value)
-			return (0);
-		head = head->next;
+		count++;
+		curr = curr->next;
 	}
-	return (1);
+	return (count);
 }
 
-int	get_distance(t_list **stack, int index)
+int	get_distance(t_node *node, int index)
 {
-	t_list	*head;
+	t_node	*head;
 	int		distance;
 
 	distance = 0;
-	head = *stack;
+	head = node;
 	while (head)
 	{
 		if (head->index == index)
@@ -60,25 +45,26 @@ int	get_distance(t_list **stack, int index)
 	return (distance);
 }
 
-void	make_top(t_list **stack, int distance)
+// get min index from stack
+int	get_min(t_stack *stack, int val)
 {
-	t_list	*head;
-	int		tmp;
+	t_node	*head;
+	int		min;
 
-	if (distance == 0)
-		return ;
-	head = *stack;
-	tmp = ft_lstsize(head) - distance;
-	if (distance <= (ft_lstsize(head) / 2))
+	head = stack->top;
+	min = head->index;
+	while (head->next)
 	{
-		while (distance-- > 0)
-			ra(stack);
+		head = head->next;
+		if ((head->index < min) && head->index != val)
+			min = head->index;
 	}
-	else
-	{
-		while (tmp-- > 0)
-			rra(stack);
-	}
+	return (min);
 }
 
-
+void	error(t_set *set)
+{
+	ft_print("Error\n");
+	free_set(set);
+	exit(1);
+}

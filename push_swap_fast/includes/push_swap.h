@@ -3,66 +3,96 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
+/*   By: yhruda <yhruda@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/26 16:44:15 by yhruda            #+#    #+#             */
-/*   Updated: 2025/08/26 17:12:54 by yhruda           ###   ########.fr       */
+/*   Created: 2025/03/13 13:59:15 by yhruda          #+#    #+#             */
+/*   Updated: 2025/09/01 12:45:36 by yhruda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "../libftprintf/ft_printf.h"
+// # include "../libft/libft.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-// Stack
-typedef struct s_list
+typedef struct s_node
 {
 	int				value;
 	int				index;
-	struct s_list	*next;
-}				t_list;
+	struct s_node	*next;
+}					t_node;
 
-// Util functions
-t_list	*ft_lstnew(int value);
-t_list	*ft_lstlast(t_list *head);
-void	ft_lstadd_front(t_list **stack, t_list *new);
-void	ft_lstadd_back(t_list **stack, t_list *new);
-void	printlist(t_list *head);
-int		ft_lstsize(t_list *head);
-int		get_min(t_list **stack, int val);
+typedef struct s_stack
+{
+	t_node			*top;
+}					t_stack;
 
-void	ft_error(char *msg);
-void	ft_check_args(int argc, char **argv);
-int		is_sorted(t_list **stack);
-int		get_distance(t_list **stack, int index);
-void	make_top(t_list **stack, int distance);
-void	free_stack(t_list **stack);
-void	ft_free(char **str);
+typedef struct s_set
+{
+	t_stack			*a;
+	t_stack			*b;
+}					t_set;
 
-// Algorithm utils
-void	radix_sort(t_list **stack_a, t_list **stack_b);
-void	simple_sort(t_list **stack_a, t_list **stack_b);
-void	index_stack(t_list **stack);
-void	sort_3(t_list **stack_a);
-void	sort_5(t_list **stack_a, t_list **stack_b);
+// utils.c
+void				error(t_set *set);
+int					get_distance(t_node *node, int index);
+int					get_min(t_stack *stack, int val);
+// mem.c
+void				free_stack(t_stack *stack);
+void				free_set(t_set *set);
+void				free_args(char **str);
+// ft_print.c (to be reviewed)
+void				ft_print(const char *str);
+// stack.c
+void				add(t_stack *stack, int value);
+void				add_end(t_stack *stack, int value);
+t_set				*init_set(int argc, char **argv);
+int					is_sorted(t_stack *stack);
+// index.c
+void				index_stack(t_stack *a);
+// check_args.c
+void				ft_check_args(int argc, char **argv, t_set *set);
+// debug.c
+void				print_stack(t_node *top);
+// instructions.c
+int					stack_size(t_stack *stack);
+int					ra(t_set *set);
+int					pb(t_set *set);
+int					pa(t_set *set);
+// radix.c
+void				radix_sort(t_set *set);
 
-// Instruction functions
-int		swap(t_list **stack);
-int		push(t_list **stack_to, t_list **stack_from);
-int		rotate(t_list **stack);
-int		reverseRotate(t_list **stack);
+// stack_utils.c
+int					stack_size(t_stack *stack);
+int					swap(t_stack *stack);
+int					push(t_stack *to, t_stack *from);
+int					rotate(t_stack *stack);
+int					reverse_rotate(t_stack *stack);
 
-int		sa(t_list **stack_a);
-int		sb(t_list **stack_b);
-int		ss(t_list **stack_a, t_list **stack_b);
-int		pa(t_list **stack_a, t_list **stack_b);
-int		pb(t_list **stack_b, t_list **stack_a);
-int		ra(t_list **stack_a);
-int		rb(t_list **stack_b);
-int		rr(t_list **stack_a, t_list **stack_b);
-int		rra(t_list **stack_a);
-int		rrb(t_list **stack_b);
-int		rrr(t_list **stack_a, t_list **stack_b);
+// simple.c
+void				simple_sort(t_set *set);
+
+// stack_instructions
+int					sa(t_set *set);
+int					sb(t_set *set);
+int					ss(t_set *set);
+int					pa(t_set *set);
+int					pb(t_set *set);
+int					ra(t_set *set);
+int					rb(t_set *set);
+int					rr(t_set *set);
+int					rra(t_set *set);
+int					rrb(t_set *set);
+int					rrr(t_set *set);
+
+// ft_atoi.c
+int					ft_atoi(const char *str);
+// ft_isdigit.c
+int					ft_isdigit(int c);
+// ft_split.c
+char				**ft_split(char const *s, char c);
 
 #endif

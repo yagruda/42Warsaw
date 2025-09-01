@@ -5,47 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/26 16:55:38 by yhruda            #+#    #+#             */
-/*   Updated: 2025/08/26 16:55:39 by yhruda           ###   ########.fr       */
+/*   Created: 2025/09/01 12:52:06 by yhruda            #+#    #+#             */
+/*   Updated: 2025/09/01 12:53:58 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
-static t_list	*get_next_min(t_list **stack)
+static t_node	*get_next_min(t_stack *stack)
 {
-	t_list	*head;
-	t_list	*min;
-	int		has_min;
+	t_node	*current;
+	t_node	*min_node;
 
-	min = NULL;
-	has_min = 0;
-	head = *stack;
-	if (head)
+	if (!stack || !stack->top)
 	{
-		while (head)
-		{
-			if ((head->index == -1) && (!has_min || head->value < min->value))
-			{
-				min = head;
-				has_min = 1;
-			}
-			head = head->next;
-		}
+		return (NULL);
 	}
-	return (min);
+	current = stack->top;
+	min_node = NULL;
+	while (current)
+	{
+		if (current->index == -1 && (!min_node
+				|| current->value < min_node->value))
+			min_node = current;
+		current = current->next;
+	}
+	return (min_node);
 }
 
-void	index_stack(t_list **stack)
+void	index_stack(t_stack *a)
 {
-	t_list	*head;
+	t_node	*head;
 	int		index;
 
 	index = 0;
-	head = get_next_min(stack);
+	head = get_next_min(a);
 	while (head)
 	{
 		head->index = index++;
-		head = get_next_min(stack);
+		head = get_next_min(a);
 	}
 }
