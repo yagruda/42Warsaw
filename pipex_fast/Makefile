@@ -1,54 +1,34 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/09/01 12:17:09 by yhruda            #+#    #+#              #
-#    Updated: 2025/09/01 12:17:25 by yhruda           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+LIBFT_DIR = ./libft
+LIBFT = $(LIBFT_DIR)/libft.a
+SRC = pipex.c get_cmd_path.c processes.c utils.c
+OBJ = $(SRC:.c=.o)
+NAME = pipex
 
+all: $(LIBFT) $(NAME)
 
-NAME 		= pipex
+$(NAME): $(OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT)
 
-NAME_BONUS	= pipex_bonus
+# Compile object files
+%.o: %.c pipex.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
-CC			= gcc
+# Compile libft
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
 
-CFLAGS		=	-Wall -Werror -Wextra -g 
+# Clean obj files
+clean:
+	$(MAKE) clean -C $(LIBFT_DIR)
+	rm -f $(OBJ)
 
-RM			= rm -f 
+# Clean everything (lib and obj)
+fclean: clean
+	$(MAKE) fclean -C $(LIBFT_DIR)
+	rm -f $(NAME)
 
-LIB			= ./libft/libft/libft.a
+re: fclean all
 
-MAKE_LIBFT	= cd ./libft/libft && make
-
-CLEAR_LIBFT	= cd ./libft/libft && make fclean
-
-SRC			= ./src/main.c ./src/pipex.c ./src/ft_error_message.c \
-				./src/ft_get_cmd.c
-
-OBJS = ${SRC:%.c=%.o}
-
-all		: $(NAME)
-
-$(NAME)	: $(OBJS)
-	$(MAKE_LIBFT)
-	$(CC) $(OBJS) $(LIB) $(CFLAGS) -o $(NAME)
-
-clean	: 
-	@$(MAKE)  -C ./libft/libft clean
-	$(RM) $(OBJS)
-
-fclean	: clean
-	@$(MAKE) -C ./libft/libft fclean
-	$(RM) $(NAME)
-
-rmfile	: clean
-	$(RM) outfile
-	$(RM) infile
-	$(RM) output
-
-re		: fclean all
+.PHONY: all clean fclean re
