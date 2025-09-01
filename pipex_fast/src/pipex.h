@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 12:20:39 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/01 12:20:44 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/01 12:38:06 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdio.h>
 # include <sys/wait.h>
 # include <fcntl.h>
-# include "../libs/libft/libft.h"
+# include "../libft/libft/libft.h"
 # include "error.h"
 
 # define TRUE 1
