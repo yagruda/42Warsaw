@@ -1,0 +1,12 @@
+{
+	"files.associations": {
+		"*.c": "c",
+		"libft.h": "c",
+		"stddef.h": "c",
+		"stdlib.h": "c",
+		"ft_printf.h": "c",
+		"stdarg.h": "c",
+		"__stdarg_va_copy.h": "c",
+		"push_swap.h": "c"
+	}
+}

@@ -5,19 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/31 23:16:00 by yhruda            #+#    #+#             */
-/*   Updated: 2025/08/31 23:16:01 by yhruda           ###   ########.fr       */
+/*   Created: 2024/12/16 19:40:54 by admin             #+#    #+#             */
+/*   Updated: 2025/09/05 21:34:44 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t len;
+	int	i;
 
-	len = 0;
-	while (s[len] != '\0')
-		len++;
-	return (len);
+	i = 0;
+	while (*s)
+	{
+		i++;
+		s++;
+	}
+	return (i);
 }
+
+/*
+int	main(void)
+{
+	printf("%d", ft_strlen("Imarockstar"));
+	return(0);
+}
+*/

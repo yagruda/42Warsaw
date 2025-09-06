@@ -1,72 +1,35 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/08/31 23:05:43 by yhruda            #+#    #+#              #
-#    Updated: 2025/08/31 23:10:33 by yhruda           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+LIBFT_DIR = ./Includes/libft
+LIBFT = $(LIBFT_DIR)/libft.a
+SRC = main.c ft_error.c stack_helpers.c Includes/ft_printf.c Includes/formats.c
+OBJ = $(SRC:.c=.o)
+NAME = push_swap
 
-NAME1	= push_swap
+all: $(LIBFT) $(NAME)
 
-NAME2	= checker
+$(NAME): $(OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT)
 
-CFLAGS 	= -Wall -Wextra -Werror
+# Compile object files
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-SRC1 	= src/push_swap.c src/validation.c src/actions.c src/actions_2.c src/actions_3.c \
-			src/quick_sort.c src/separation.c src/initialization.c src/sort_3_and_5_element.c \
-				src/global_sort.c src/finding_place.c
+# Compile libft
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
 
-SRC2 	= src/checker.c src/validation.c src/actions.c src/actions_2.c src/actions_3.c \
-			src/quick_sort.c src/separation.c src/initialization.c
-
-OBJSFD 	= temporary
-
-OBJS1 	= $(addprefix $(OBJSFD)/,$(SRC1:.c=.o))
-
-OBJS2 	= $(addprefix $(OBJSFD)/,$(SRC2:.c=.o))
-
-HDR 		= -I./includes
-
-LIBFT_HDR 	= -I./includes/libft
-
-LIB_BINARY	= -L./includes/libft -lft
-
-LIBFT		= ./includes/libft/libft.a
-
-all: $(LIBFT) ./includes/libft/libft.a $(NAME1) $(NAME2)
-
-FORCE:		;
-
-LIBFT		= ./includes/libft/libft.a
-
-$(LIBFT):	FORCE
-			make -C ./includes/libft
-
-$(OBJSFD):
-	mkdir $@
-
-$(OBJSFD)/%.o: %.c | $(OBJSFD)
-	gcc -g $(CFLAGS) $(HDR) $(LIBFT_HDR) -c $< -o $@
-
-$(NAME1): $(OBJS1) $(LIBFT) ./includes/push_swap.h
-	gcc -g $(OBJS1) $(LIB_BINARY) -o $@
-
-$(NAME2): $(OBJS2) $(LIBFT) ./includes/push_swap.h
-	gcc -g $(OBJS2) $(LIB_BINARY) -o $@
-
+# Clean obj files
 clean:
-	/bin/rm -f $(OBJS)
-	rm -rf temporary/src/*.o
-	make -C ./includes/libft clean
+	$(MAKE) clean -C $(LIBFT_DIR)
+	rm -f $(OBJ)
 
+# Clean everything (lib and obj)
 fclean: clean
-	/bin/rm -f $(NAME1)
-	/bin/rm -f $(NAME2)
-	make -C ./includes/libft fclean
+	$(MAKE) fclean -C $(LIBFT_DIR)
+	rm -f $(NAME)
+
 
 re: fclean all
 
+.PHONY: all clean fclean re

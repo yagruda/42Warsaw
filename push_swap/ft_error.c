@@ -1,34 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/21 12:16:35 by yhruda            #+#    #+#             */
-/*   Updated: 2025/01/05 17:07:31 by yhruda           ###   ########.fr       */
+/*   Created: 2025/09/05 11:49:34 by yhruda            #+#    #+#             */
+/*   Updated: 2025/09/05 13:08:09 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-char	*ft_strchr(const char *s, int c)
+void ft_error(void)
 {
-	while (*s != '\0')
-	{
-		if (*s == (char)(c))
-			return ((char *)s);
-		s++;
-	}
-	if (c == '\0' && *s == '\0')
-		return ((char *)s);
-	return (NULL);
+	write (2, "Error\n", 6);
+	exit(1);
 }
-
-/* int main()
-{
-	char* str = "Hello";
-	printf("%p\n", ft_strchr(str, '\0'));
-	printf("%p\n", strchr(str, '\0'));
-	return (0);
-} */
