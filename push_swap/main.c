@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 11:05:31 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/05 22:15:03 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/06 12:56:41 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,45 +19,46 @@ int ft_list_args (int argc, char** argv)
 	// return the list
 }
 */
+void ft_free_arr(char** arr)
+{
+	int i = 0;
+	while (arr[i] != NULL)
+		free(arr[i++]);
+	free(arr);
+}
+
+/*
+ we assume we don't have letters (so we don't check for it).
+ We check - do we have space in argv? 
+ if no, we push it directly to stack using ft_atoi
+ else if yes, we create a temp arr of strings and fill it using ft_split
+ then we push each element of temp arr to stack_a using ft_atoi
+ finally we call ft_free_arr
+*/
+
 void ft_parse_args(int argc, char** argv, struct stack_node** stack_a)
 {
-	// if argv has characters other than digits, space or '-' or '+' or is empty or dublicates, call ft_error and exit
-	// else (if success) create a list using ft_list_args.
-	
-	// ft_list_args(argc, argv);
-	(void)argv;
-	ft_printf("has %d argc\n", argc);
-
-	int i = 1;
+	int i = 1; // start from first arg, not ./push_swap
 	int j = 0;
+	char** temp_arr;
+	
 	while (i < argc)
 	{
-		
 		if (ft_strchr(argv[i], ' ') == NULL)
-		{
-			ft_printf("we don't have spaces in argvs, I write as it is\n");
 			ft_push(stack_a, ft_atoi(argv[i]));
-		}
 		else
 		{
-			ft_printf("we have space in argv\n");
-			char** temp_arr = ft_split(argv[i], ' ');
+			ft_printf("found space in argv\n");
+			temp_arr = ft_split(argv[i], ' ');
 			while (temp_arr[j] != NULL)
 			{
 				ft_push(stack_a, ft_atoi(temp_arr[j]));
 				j++;
 			}
 		}
-		i++;
+		i++;	
 	}
-
-
-	
-	// char	**ft_split(char const *s, char c)
-	// int	ft_atoi(const char *str)
-	// int	ft_strlen(const char *s)
-	// char	*ft_strchr(const char *s, int c)
-	
+	ft_free_arr(temp_arr);
 }
 
 int main (int argc, char** argv)
@@ -75,16 +76,9 @@ int main (int argc, char** argv)
 		ft_error();
 
 	ft_parse_args(argc, argv, &stack_a);
-	// TBD: Decide, do I need to make any ft_parse_args return 0 for succes and -1 for fail and etc
 
+	ft_read_stack(stack_a);
 
-
-	// just a test 
-
-
-	// !! TBD MORNING
-	ft_read_stack(stack_a); // TBD !!!!! Here I have an issue. I guess because (struct stack_node** current). ASK GPT!
-	// !! TBD MORNING
 	ft_free_stack(&stack_a);
 	ft_free_stack(&stack_b);
 

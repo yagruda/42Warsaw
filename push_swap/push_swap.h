@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 11:07:08 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/05 22:11:53 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/06 12:09:18 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void ft_free_stack(struct stack_node** head);
 void ft_push(struct stack_node** top_ref, int value);
 void ft_pop (struct stack_node** top_ref);
 void ft_is_empty (struct stack_node** top_ref);
-void ft_read_stack(struct stack_node** current); // for tests to read & write stack
+void ft_read_stack(struct stack_node* current); // for tests to read & write stack
 void ft_parse_args(int argc, char** argv, struct stack_node** stack_a);
 
 #endif

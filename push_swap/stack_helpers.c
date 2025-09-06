@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 12:35:52 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/05 22:15:05 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/06 12:09:06 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void ft_is_empty (struct stack_node** top_ref)
 	}
 }
 
-void ft_read_stack(struct stack_node** current)
+void ft_read_stack(struct stack_node* current)
 {
 	while (current != NULL)
 	{
