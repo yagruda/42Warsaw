@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 11:05:31 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/06 12:56:41 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/08 15:12:33 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,7 @@ int ft_list_args (int argc, char** argv)
 	// return the list
 }
 */
-void ft_free_arr(char** arr)
-{
-	int i = 0;
-	while (arr[i] != NULL)
-		free(arr[i++]);
-	free(arr);
-}
+
 
 /*
  we assume we don't have letters (so we don't check for it).
@@ -36,51 +30,62 @@ void ft_free_arr(char** arr)
  finally we call ft_free_arr
 */
 
-void ft_parse_args(int argc, char** argv, struct stack_node** stack_a)
+int ft_parse_args(int argc, char** argv, t_stack_node** stack_a)
 {
-	int i = 1; // start from first arg, not ./push_swap
-	int j = 0;
-	char** temp_arr;
-	
-	while (i < argc)
-	{
-		if (ft_strchr(argv[i], ' ') == NULL)
-			ft_push(stack_a, ft_atoi(argv[i]));
-		else
-		{
-			ft_printf("found space in argv\n");
-			temp_arr = ft_split(argv[i], ' ');
-			while (temp_arr[j] != NULL)
-			{
-				ft_push(stack_a, ft_atoi(temp_arr[j]));
-				j++;
-			}
-		}
-		i++;	
-	}
-	ft_free_arr(temp_arr);
+    int i = 1; // start from first arg, not ./push_swap
+    int j = 0;
+    int arguments_count = 0;
+    char** temp_arr;
+    
+    while (i < argc)
+    {
+        if (ft_strchr(argv[i], ' ') == NULL)
+        {
+            append_node(stack_a, ft_atoi(argv[i]));
+            arguments_count++;
+        }
+        else
+        {
+            ft_printf("found space in argv\n");
+            temp_arr = ft_split(argv[i], ' ');
+            while (temp_arr[j] != NULL)
+            {
+                append_node(stack_a, ft_atoi(temp_arr[j]));
+                j++;
+                arguments_count++;
+            }
+            ft_free_arr(temp_arr);
+        }
+        i++;	
+    }
+    return arguments_count; 	// return count of numbers pushed to stack
 }
 
 int main (int argc, char** argv)
 {	
 
-	// array of Stack Nodes that we crated, imagine as arr of Integers int* arr;
-	struct stack_node* stack_a;
-	struct stack_node* stack_b;
-	
-	stack_a = NULL; 
-	stack_b = NULL;
-	
-	// as norm requires, stack has to be created before checking args. 
-	if (argc < 2)
-		ft_error();
+    // array of Stack Nodes that we crated, imagine as arr of Integers int* arr;
+	t_stack_node* a;
+	t_stack_node* b;
+	int arguments_count;
 
-	ft_parse_args(argc, argv, &stack_a);
+    a = NULL; 
+    b = NULL;
+    arguments_count = 0;
+    
+    // as norm requires, stack has to be created before checking args. 
+    if (argc < 2)
+        ft_error();
 
-	ft_read_stack(stack_a);
+    arguments_count = ft_parse_args(argc, argv, &a);
 
-	ft_free_stack(&stack_a);
-	ft_free_stack(&stack_b);
+	if (!ft_is_stack_sorted(a))
+		ft_sort_stack(&a, &b, arguments_count); // if we have only one number we would just return from it
+    
+    ft_read_stack(a);
 
-	return (0);
+    ft_free_stack(&a);
+    ft_free_stack(&b);
+
+    return (0);
 }
