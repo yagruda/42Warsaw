@@ -6,25 +6,11 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 12:35:52 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/08 15:16:04 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/09 12:41:08 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_stack_node* ft_new_node(int nbr)
-{
-    t_stack_node* stack_node = malloc(sizeof(t_stack_node));
-    if(!stack_node)
-    {
-        ft_printf("stack_node malloc failed\n");
-        return (NULL);
-    }
-    stack_node->nbr = nbr;
-    stack_node->next = NULL;
-
-    return(stack_node);
-}
 
 void append_node(t_stack_node **stack, int n)
 {
@@ -46,8 +32,8 @@ void append_node(t_stack_node **stack, int n)
     else 
     {
         last_node = find_last(*stack);
-        last_node->next = node;
-        node->prev = last_node;
+        last_node->next = node; 
+        node->prev = last_node; 
     }
 }
 
@@ -59,32 +45,6 @@ t_stack_node* find_last(t_stack_node* stack)
     while (stack->next != NULL)
         stack = stack->next;
     return (stack);
-}
-/*
-t_stack_node* find_max(t_stack_node* stack)
-{
-    if (!stack)
-        return (NULL);
-    
-    int max = stack->nbr;
-}
-*/
-
-void ft_free_stack(t_stack_node** head)
-{
-    t_stack_node* current;
-    t_stack_node* next;
-
-    current = *head;
-    
-    while (current != NULL)
-    {
-        next = current->next;
-        free(current);
-        current = next;
-    }
-
-    free(current);
 }
 
 void ft_pop (t_stack_node** top_ref)

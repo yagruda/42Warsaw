@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 16:37:05 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/08 15:33:19 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/08 16:58:55 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,16 @@ static void swap(t_stack_node** head)
 	element_s = (*head)->next;
 
 	if (element_f == NULL || element_s == NULL)
-		return ; // if there is only one or no elements, do nothing
+		return ; 
+
+	// Cледующим элементом после element_f теперь будет тот же, что и после element_s
 	element_f->next = element_s->next;
-	element_f->
+	element_f->prev = element_s;
+	if (element_s->next != NULL)
+		element_s->next->prev = element_f;
+	element_s->next = element_f;
+	element_s->prev = NULL;
+	*head = element_s;
 	
 }
 
@@ -43,17 +50,14 @@ void sa(t_stack_node** a, bool print)
 
 void sb(t_stack_node** b, bool print)
 {
-	(void)b;
-	(void)print;
 	swap(b);
-	// TBD
+	if(!print)
+		ft_printf("sb\n");
 }
-
-//Stimutaneously swap the first two nodes of the stack and print the instruction
 void ss(t_stack_node** a, t_stack_node** b, bool print)
 {
-	(void)a;
-	(void)b;
-	(void)print;
-	// TBD
+	swap(a);
+	swap(b);
+	if (!print)
+		ft_printf("ss\n");
 }

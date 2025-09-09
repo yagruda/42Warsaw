@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 11:07:08 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/08 12:24:28 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/09 13:16:33 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,21 @@ int ft_is_stack_sorted(t_stack_node* stack);
 //command_swap.c
 void sa(t_stack_node** a, bool print);
 
-//stack_helpers.c
+//command_rotate.c
+void ra(t_stack_node** a, bool print);
+void rb(t_stack_node** b, bool print);
+void rr(t_stack_node** a, t_stack_node** b, bool print);
 
+//stack_helpers.c
 t_stack_node* find_last(t_stack_node* stack);
 void append_node(t_stack_node **stack, int n);
 
+//command_reverse_rotate.c
+void rra(t_stack_node** a, bool print);
+void rrb(t_stack_node** b, bool print);
+void rrr(t_stack_node** a, t_stack_node** b, bool print);
+
+//lessons, can be deleted
+void delete_first_node(t_stack_node** stack);
 
 #endif

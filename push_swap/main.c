@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 11:05:31 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/08 15:12:33 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/09 13:00:52 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int main (int argc, char** argv)
 	if (!ft_is_stack_sorted(a))
 		ft_sort_stack(&a, &b, arguments_count); // if we have only one number we would just return from it
     
+    delete_first_node(&a);
     ft_read_stack(a);
 
     ft_free_stack(&a);

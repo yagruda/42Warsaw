@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 11:05:31 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/06 16:01:26 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/08 17:01:26 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void ft_parse_args(int argc, char** argv)
 	// else (if success) create a list using ft_list_args.
 	
 	// ft_list_args(argc, argv);
-	(void)argc;
-	(void)argv;
 	ft_printf("has some args\n");
 	
 }
