@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 15:23:50 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/08 17:33:33 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/09 15:20:09 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,29 +27,7 @@ int ft_is_stack_sorted(t_stack_node* stack)
 	return 1;
 }
 
-t_stack_node* find_max(t_stack_node* stack)
-{
-	long max;
-	t_stack_node* max_node;
 
-	if (!stack)
-		return (NULL);
-	
-	// -9223372036854775808
-	max = LONG_MIN;
-	
-	while (stack)
-	{
-		if (stack->nbr > max)
-		{
-			max = stack->nbr;
-			max_node = stack;
-		}	
-		stack = stack->next;
-	}
-
-	return (max_node);
-}
 
 void ft_sort_three(t_stack_node** stack_a)
 {
@@ -61,18 +39,36 @@ void ft_sort_three(t_stack_node** stack_a)
 		ra(stack_a, false);
 	else if ((*stack_a)->next == biggest_node) // biggest is second
 		rra(stack_a, false);
-	
-/*	if ((*stack_a)->nbr > (*stack_a)->next->nbr)
+	if ((*stack_a)->nbr > (*stack_a)->next->nbr)
 		sa(stack_a, false);
-*/
+
 		
 }
-void ft_sort_turk(t_stack_node** stack_a, t_stack_node** stack_b)
+void	ft_sort_turk(t_stack_node **stack_a, t_stack_node **stack_b) //Define a function that sorts stack `a` if it has more than 3 nodes
 {
-	(void)stack_a;
-	(void)stack_b;
-	// to be implemented
+	int	len_a; //To store the length of stack `a`
+
+	len_a = stack_len(*stack_a);
+	if (len_a-- > 3 && !ft_is_stack_sorted(*stack_a)) //If stack `a` has more than three nodes and aren't sorted
+		pb(stack_b, stack_a, false);
+	if (len_a-- > 3 && !ft_is_stack_sorted(*stack_a)) //If stack `a` still has more than three nodes and aren't sorted
+		pb(stack_b, stack_a, false);
+	while (len_a-- > 3 && !ft_is_stack_sorted(*stack_a)) //If stack `a` still has more than three nodes and aren't sorted
+	{
+		init_nodes_a(*stack_a, *stack_b); //Iniate all nodes from both stacks
+		move_a_to_b(stack_a, stack_b); //Move the cheapest `a` nodes into a sorted stack `b`, until three nodes are left in stack `a`
+	}
+	ft_sort_three(stack_a);
+	while (*stack_b) //Until the end of stack `b` is reached
+	{
+		init_nodes_b(*stack_a, *stack_b); //Initiate all nodes from both stacks
+		move_b_to_a(stack_a, stack_b); //Move all `b` nodes back to a sorted stack `a`
+	}
+	current_index(*stack_a); //Refresh the current position of stack `a`
+	min_on_top(stack_a); //Ensure smallest number is on top
 }
+
+
 void ft_sort_stack(t_stack_node** stack_a, t_stack_node** stack_b, int arguments_count)
 {
 	if (arguments_count == 0)

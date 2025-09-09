@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = ./Includes/Libft
 LIBFT = $(LIBFT_DIR)/libft.a
-SRC = *.c Includes/ft_printf.c Includes/formats.c
+SRC = $(wildcard *.c) Includes/ft_printf.c Includes/formats.c
 OBJ = $(SRC:.c=.o)
 NAME = push_swap
 

@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 17:30:47 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/08 17:32:45 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/09 15:27:50 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 
 static void reverse_rotate(t_stack_node **stack)
 {
-	t_stack_node* first;
-	t_stack_node* last;
+    t_stack_node* last;
 
-	if ((!stack) || (*stack)->next == NULL)
-		return ;
+    if (!*stack || !(*stack)->next)
+        return;
 
-	first = *stack;
-	last = find_last(*stack);
-	
-	*stack = last;
-	last = first;
-	
+    last = find_last(*stack);
+    // Detach last node from its previous node
+    last->prev->next = NULL;
+    // Move last node to the front
+    last->next = *stack;
+    last->prev = NULL;
+    (*stack)->prev = last;
+    *stack = last;
 }
 
 void rra(t_stack_node** a, bool print)
