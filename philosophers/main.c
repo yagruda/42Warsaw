@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 13:55:01 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/16 19:59:51 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/18 19:42:24 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,21 @@
 
 int main(void)
 {
-	phil_t phil[N_PHILOSOPHER]; // create an array of 5 phil_t philosophers 
-	spoon_t spoon[N_PHILOSOPHER]; // create an array of 5 spoon_t spoons
+	thread_args_t thread_args[N_PHILOSOPHER];
+	spoon_t spoons[N_PHILOSOPHER];
+	phil_t philosophers[N_PHILOSOPHER];
+	
 	pthread_attr_t attr; // TBD change later as it's not allowed in 42 
 	int i = 0;
 	
 	// spoon init	
 	while (i < N_PHILOSOPHER)
 	{
-		spoon[i].spoon_id = i;
-		spoon[i].is_used = 0;
-		spoon[i].phil = NULL;
-		pthread_mutex_init(&spoon[i].mutex, NULL);
-		pthread_cond_init(&spoon[i].cv, NULL); // TBD: Change to 42 semaphore.  for thread coordionation competing for this resource.
+		spoons[i].spoon_id = i;
+		spoons[i].is_used = 0;
+		spoons[i].phil = NULL;
+		pthread_mutex_init(&spoons[i].mutex, NULL);
+		pthread_cond_init(&spoons[i].cv, NULL); // TBD: Change as 42 wouldn't allow it
 		i++;
 	}
 
@@ -42,15 +44,22 @@ int main(void)
 	i = 0;
 	
 	// create philosophers threads
+	// &philosophers[i], &spoons[i] copy addres, not a value!
 	while(i < N_PHILOSOPHER)
 	{
-		phil[i].phil_id = i;
-		phil[i].eat_count = 0;
-		pthread_create(&phil[i].thread_handle, &attr, philosopher_fn, &phil[i]);
+		philosophers[i].phil_id = i;
+		philosophers[i].eat_count = 0;
+		thread_args[i].phil = &philosophers[i]; 
+		thread_args[i].spoon = &spoons[i];
+		printf("spoon[i] id from a structure is %d, it's assigned sucessfully \n", thread_args[i].spoon->spoon_id);
+		pthread_create(&thread_args[i].phil->thread_handle, &attr, philosopher_fn, &thread_args[i]); 
 		i++;
+
+		
+		usleep(60);
 	}
 
-	phil_eat(&phil[0], spoon); // test call
+	// phil_eat(&philosophers[0], spoons); // test call
 
 	return 0;
 }
