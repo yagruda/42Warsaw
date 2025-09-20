@@ -1,0 +1,44 @@
+int phil_eat (t_philo *philo, t_spoon *spoon)
+{
+	t_spoon *left_spoon = phil_get_left_spoon(philo, spoon);
+	t_spoon *right_spoon = phil_get_right_spoon(philo, spoon);
+	// check if both spoons are available
+	// take both spoons (set is_used = 1, set philo pointer to current philo)
+	
+	if (left_spoon->is_used == 0 && right_spoon->is_used == 0)
+	{
+		pthread_mutex_lock(&left_spoon->mutex);
+		print_status(philo, "has taken a fork");
+		pthread_mutex_lock(&right_spoon->mutex);
+		print_status(philo, "has taken a fork");
+		
+		// both spoons are available
+		left_spoon->philo = philo;
+		right_spoon->philo = philo;
+
+		//TO BE CHECKED
+		left_spoon->is_used = 1;
+		right_spoon->is_used = 1;
+		
+		//The C assert library assert() macro is used in error handling to check if any assumptions made in the program during runtime is correct or not. It is used to catch logical error in the program in the development stage itself.
+		assert(left_spoon->philo == philo); // for debug. TBD: remove later
+		assert(right_spoon->philo == philo); // for debug. TBD: remove later
+		assert(left_spoon->is_used == 1);
+		assert(right_spoon->is_used == 1);
+		philo->eat_count++;
+		
+	//	printf("Philosopher %d is eating with spoons %d and %d his %d time\n", philo->philo_id, left_spoon->spoon_id, right_spoon->spoon_id, philo->eat_count);
+	}
+	else
+	{
+		pthread_mutex_unlock(&left_spoon->mutex);
+		pthread_mutex_unlock(&right_spoon->mutex);
+	//	printf("Philosopher %d found spoons %d and %d not available\n", philo->philo_id, left_spoon->spoon_id, right_spoon->spoon_id);
+		return 0; // spoons not available
+	}
+
+	return 1; // spoons successfully taken
+
+	sleep(1);
+	
+}

@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 13:54:07 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/18 19:35:47 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/19 22:18:09 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,73 @@
 #include "Includes/ft_printf.h" // include Libft inside
 #include <pthread.h>
 #include <stdio.h>
+#include "sys/time.h"
 
-#define N_PHILOSOPHER 5 // TBD: later change to input value;
 #include <assert.h> // TBD: delete later. for debug only
 
-typedef struct phil_s
+typedef struct s_philo
 {
-	int phil_id;
 	pthread_t thread_handle;
+	pthread_mutex_t print_lock;
+	int philo_id;
 	int eat_count; // TBD: for last input make a check -if eat count == required eat count -> finish simulation
-} phil_t;
+	unsigned long last_meal_eaten; // TBD: later use it in supervisor to check if philo died
+	struct s_table *table; // pointer to shared table, so we wouldn't need to paste t_table table in every function
+	
+} t_philo;
 
-typedef struct spoon_s
-{
-	int spoon_id; // ME: phil can take phil_id + 1 and phil_id - 1 spoons;
-	int is_used; // 0 is free, 1 is used
-	phil_t *phil; // if is_used == 1, set pointer to philosopher using the spoon. otherwise reset to NULL
-	pthread_mutex_t mutex; // for mutual exclusion
-	pthread_cond_t cv; //TBD: Change to 42 semaphore.  for thread coordionation competing for this resource. 
-} spoon_t;
 
-typedef struct thread_args_s
+typedef struct s_fork
 {
-	phil_t *phil;
-	spoon_t *spoon;
-} thread_args_t;
+	int fork_id; // t_fork position in array + 1
+	int is_used;
+	t_philo *philo; // if is_used == 1, set pointer to philosopher using the fork. otherwise reset to NULL
+	pthread_mutex_t mutex;
+} t_fork;
+
+typedef struct s_table
+{
+	int num_of_philo;
+	unsigned long time_to_die;
+	unsigned long time_to_eat;
+	unsigned long time_to_sleep;
+	int num_must_eat;
+
+	unsigned long long start_time;
+	int simulation_should_end;
+
+	t_philo *philo;
+	t_fork *forks;
+
+} t_table;
 
 // assignment_din_ph.c
-spoon_t *phil_get_right_spoon(phil_t *phil, spoon_t *spoon);
-spoon_t *phil_get_left_spoon(phil_t *phil, spoon_t *spoon);
-int phil_eat (phil_t *phil, spoon_t *spoon);
-void philosopher_release_both_spoons(phil_t *phil, spoon_t *left_spoon, spoon_t *right_spoon);
-int philosopher_get_access_both_spoons(phil_t *phil, spoon_t *spoon);
+
+t_fork *philo_get_right_fork(t_philo *philo, t_fork *fork);
+t_fork *philo_get_left_fork(t_philo *philo, t_fork *fork);
+int philo_eat (t_philo *philo, t_fork *fork);
+void philosopher_release_both_forks(t_philo *philo, t_fork *left_fork, t_fork *right_fork);
+int philosopher_get_access_both_forks(t_philo *philo, t_fork *fork);
 void* philosopher_fn(void *arg);
+
+// supervisor.c
+void* supervisor_fn(void *arg);
+
+
 // main.c
 
 
+//helpers.c
+
+void print_status(t_philo *philo, char *status);
+void init_forks_filos(t_philo *philosophers, t_fork *forks, int n_philos, t_table* table);
+void create_philo_threads(t_philo* philosophers);
+void init_table(t_table* table, t_philo* philosophers, t_fork* forks, int n_philos);
+long long ft_time_in_ms(void);
+
+//init.c
+int input_check(int argc, char** argv);
+int structures_malloc(t_philo** philo, t_fork** fork, t_table** table, int n_philos);
 
 
 #endif

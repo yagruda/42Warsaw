@@ -2,6 +2,11 @@
 	"files.associations": {
 		"*.c": "c",
 		"ft_printf.h": "c",
-		"main": "c"
+		"main": "c",
+		"philosophers.h": "c",
+		"time.h": "c",
+		"stdint.h": "c",
+		"assert.h": "c",
+		"example": "c"
 	}
 }
