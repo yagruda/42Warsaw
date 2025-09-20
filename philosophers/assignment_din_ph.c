@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 12:58:11 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/20 17:25:50 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/20 17:33:28 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ void* philosopher_fn(void *arg)
             philo_eats(philo);
             philosopher_release_both_forks(philo, left_fork, right_fork);
             print_status(philo, "is sleeping");
+            usleep(philo->table->time_to_sleep * 1000);
+            
             // TBD: usleep(philo->table->time_to_sleep * 1000);
         }
         

@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 13:55:01 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/20 16:44:39 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/20 17:59:42 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,8 @@ int main(int argc, char** argv)
 	input_num_of_philo = input_check(argc, argv);	
 	if(input_num_of_philo < 2)
 		return 1;
-	else if (input_num_of_philo > 200)
-	{
-		printf("Error: too many philosophers. Max is 200.\n");
-		return 1;
-	}
-	
+
+	// maybe change input_num_of_philo to argv and assign num of philo inside init all
 	if (init_all(&philosophers, &table, &forks, input_num_of_philo))
 		return 1;
 	
