@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 18:35:15 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/22 13:11:38 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/22 15:08:52 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,12 @@ int init_all (t_philo** philosophers, t_table** table, t_fork** forks, int input
 {
 	if (structures_malloc(philosophers, forks, table, input_num_of_philo))
 		return 1;
-	init_table(*table, *philosophers, *forks, input_num_of_philo);
+	initial_init_table(*table, *philosophers, *forks);
 	init_forks_filos(*philosophers,*forks, input_num_of_philo, *table);
-	create_philo_threads(*philosophers);
 
 	return(0);
 }
 
-// TBD, it's basic version
-// ad a check case for max number of philos - 250
-int input_check(int argc, char** argv)
-{
-	if (argc < 2)
-	{
-		printf("Error: wrong number of arguments. Please provide number of philosophers.\n");
-		return -1;
-	}
-	
-	// if > 250 philosophers, return error
-	// TBD: what's about wrong input - not a number?
-	return (ft_atoi(argv[1]));
-}
 // spoon and philosophers init	
 // i do spoon_id + 1 and phil_id + 1 to start from 1. Accordingly, imagine as -1 position in array.
 void init_forks_filos(t_philo *philosophers, t_fork *forks, int n_philos, t_table* table) 
@@ -57,13 +42,9 @@ void init_forks_filos(t_philo *philosophers, t_fork *forks, int n_philos, t_tabl
 	}
 }
 
-void init_table(t_table* table, t_philo* philosophers, t_fork* forks, int n_philos)
+
+void initial_init_table(t_table* table, t_philo* philosophers, t_fork* forks)
 {
-	table->num_of_philo = n_philos;
-	table->time_to_die = 400; // how much time has to pass since last meal to die
-	table->time_to_eat = 200; // how much time it takes to eat in ms = how much time philo holds 2 forks
-	table->time_to_sleep = 200; // how much time philo do nothing after eating (even not trying to take forks)
-	table->num_must_eat = -1; // -1 means no limit
 	table->start_time = ft_time_in_ms();
 	table->simulation_should_end = 0;
 	table->philo = philosophers;
@@ -72,13 +53,26 @@ void init_table(t_table* table, t_philo* philosophers, t_fork* forks, int n_phil
 	
 }
 
+void final_init_table(t_table* table, int argc, char** argv, t_philo** philosophers)
+{
+	table->num_of_philo = ft_atoi(argv[1]);
+	table->time_to_die = ft_atoi(argv[2]);
+	table->time_to_eat = ft_atoi(argv[3]);
+	table->time_to_sleep = ft_atoi(argv[4]);
+	if (argc == 6)
+		table->num_must_eat = ft_atoi(argv[5]);
+	else 
+		table->num_must_eat = -1;
+	
+	create_philo_threads(*philosophers);
+}
 // create philosophers thread
 // Detached thread = cleans up its own resources automatically when it finishes. You cannot pthread_join it.
 // Joinable thread (default) = you must pthread_join it, otherwise you leak. That's the reason why use pthread_detach().	
 void create_philo_threads(t_philo* philosophers)
 {
 	int i;
-
+	
 	i = 0;
 	while(i < philosophers->table->num_of_philo)
 	{

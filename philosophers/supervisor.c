@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 15:58:56 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/20 17:33:26 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/22 15:03:05 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ void* supervisor_fn(void *arg)
 				return NULL;
 			i++;
 		}
+		if (check_all_full(table))
+			return NULL;
 		usleep(10);
 	}
 	return NULL;
 }
-
 
 // check if any philosopher died (if current time - last meal time => time to die -> kill all threads and write who died)
 // go into each philo through table and check if time since last meal is > than time to die
@@ -53,4 +54,43 @@ int check_starvation(t_table* table, int i)
 	return 0;
 	
 }
-// old code; if (table->time_to_die <= table->philo[i].last_meal_eaten) not correct. 
+
+int check_all_full(t_table* table)
+{
+	int i;
+	
+	i = 0;
+
+	if (table->num_must_eat <= 0)
+		return (0);
+	
+	while (i < table->num_of_philo)
+	{
+		if (!check_each_full(table, i))
+			return (0);
+		i++;
+	}
+
+	table->simulation_should_end = 1;
+	// printf("ALL PHILOS ARE FULL\n");
+	
+	return (1);
+}
+
+int check_each_full(t_table* table, int i)
+{
+	// maybe add mutex lock here too, to be sure
+
+	pthread_mutex_lock(&table->table_lock);
+	
+	if (table->num_must_eat <= table->philo[i].eat_count)
+	{
+		pthread_mutex_unlock(&table->table_lock);
+	//	printf("ONE PHILO IS FULL\n");
+		return (1);
+	}
+	pthread_mutex_unlock(&table->table_lock);
+	
+	return 0;
+	
+}

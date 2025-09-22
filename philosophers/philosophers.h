@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 13:54:07 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/20 16:53:26 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/22 15:01:26 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@
 
 typedef struct s_philo
 {
-	// s
 	pthread_t thread_handle;
 	int philo_id;
-	int eat_count; // TBD: for last input make a check -if eat count == required eat count -> finish simulation
+	int eat_count;
 	unsigned long last_meal_eaten; // TBD: later use it in supervisor to check if philo died
 	struct s_table *table; // pointer to shared table, so we wouldn't need to paste t_table table in every function
 	
@@ -73,6 +72,8 @@ void* philosopher_fn(void *arg);
 // supervisor.c
 void* supervisor_fn(void *arg);
 int check_starvation(t_table* table, int i);
+int check_each_full(t_table* table, int i);
+int check_all_full(t_table* table);
 
 // main.c
 
@@ -82,7 +83,7 @@ int check_starvation(t_table* table, int i);
 void	print_status(t_philo *philo, const char *status);
 void init_forks_filos(t_philo *philosophers, t_fork *forks, int n_philos, t_table* table);
 void create_philo_threads(t_philo* philosophers);
-void init_table(t_table* table, t_philo* philosophers, t_fork* forks, int n_philos);
+void initial_init_table(t_table* table, t_philo* philosophers, t_fork* forks);
 long long ft_time_in_ms(void);
 void	philo_delay(t_table *table, unsigned long delay_duration_ms);
 
@@ -90,5 +91,6 @@ void	philo_delay(t_table *table, unsigned long delay_duration_ms);
 int input_check(int argc, char** argv);
 int structures_malloc(t_philo** philo, t_fork** fork, t_table** table, int n_philos);
 int init_all (t_philo** philosophers, t_table** table, t_fork** forks, int input_num_of_philo);
+void final_init_table(t_table* table, int argc, char** argv, t_philo** philosophers);
 
 #endif

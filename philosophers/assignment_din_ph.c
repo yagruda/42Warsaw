@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 12:58:11 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/20 17:33:28 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/22 14:32:09 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,26 @@ int philo_take_forks (t_philo *philo, t_fork *fork)
 }
 
 
+// unsigned longs and while to break if simulation_should_end
 // TBD: answer a question to yourself: do I need to make philo_delay ? or just use sleep() in philosopher_fn? usleep isn't precise enough for 42. 
 void philo_eats (t_philo *philo)
 {
+    unsigned long eat_time;
+    unsigned long elapsed;
+
+    eat_time  = philo->table->time_to_eat * 1000;
+    elapsed = 0;
+
     pthread_mutex_lock(&philo->table->table_lock);
     philo->last_meal_eaten = ft_time_in_ms();
     philo->eat_count++;
     pthread_mutex_unlock(&philo->table->table_lock);
-    usleep(philo->table->time_to_eat * 1000);
+    
+    while (elapsed < eat_time && !philo->table->simulation_should_end)
+    {
+        usleep(1000);
+        elapsed += 1000;
+    }
 }
 
 
@@ -105,9 +117,8 @@ void* philosopher_fn(void *arg)
             philo_eats(philo);
             philosopher_release_both_forks(philo, left_fork, right_fork);
             print_status(philo, "is sleeping");
-            usleep(philo->table->time_to_sleep * 1000);
-            
-            // TBD: usleep(philo->table->time_to_sleep * 1000);
+            if (!(philo->table->simulation_should_end))
+                usleep(philo->table->time_to_sleep * 1000);
         }
         
         usleep(10);
