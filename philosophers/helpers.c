@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:39:43 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/22 12:55:50 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/22 16:44:01 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,22 @@ long long ft_time_in_ms(void)
 	gettimeofday(&t, NULL);
 	miliseconds = t.tv_sec * 1000LL + t.tv_usec / 1000;
 	return (miliseconds);
+}
+
+void	philo_delay(t_table *table, unsigned long delay_duration_ms)
+{
+	long long	start_of_delay;
+
+	start_of_delay = ft_time_in_ms();
+	while ((ft_time_in_ms() - start_of_delay) < (long long)delay_duration_ms)
+	{
+		pthread_mutex_lock(&table->table_lock);
+		if (table->simulation_should_end)
+		{
+			pthread_mutex_unlock(&table->table_lock);
+			break ;
+		}
+		pthread_mutex_unlock(&table->table_lock);
+		usleep(10);
+	}
 }

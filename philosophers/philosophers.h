@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 13:54:07 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/22 15:01:26 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/22 16:20:04 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ typedef struct s_philo
 	int eat_count;
 	unsigned long last_meal_eaten; // TBD: later use it in supervisor to check if philo died
 	struct s_table *table; // pointer to shared table, so we wouldn't need to paste t_table table in every function
+	
+	struct s_fork *left_fork;
+	struct s_fork *right_fork;
 	
 } t_philo;
 
@@ -64,7 +67,7 @@ typedef struct s_table
 
 t_fork *philo_get_right_fork(t_philo *philo, t_fork *fork);
 t_fork *philo_get_left_fork(t_philo *philo, t_fork *fork);
-int philo_take_forks (t_philo *philo, t_fork *fork);
+int philo_take_forks (t_philo *philo);
 void philosopher_release_both_forks(t_philo *philo, t_fork *left_fork, t_fork *right_fork);
 int philosopher_get_access_both_forks(t_philo *philo, t_fork *fork);
 void* philosopher_fn(void *arg);
@@ -91,6 +94,6 @@ void	philo_delay(t_table *table, unsigned long delay_duration_ms);
 int input_check(int argc, char** argv);
 int structures_malloc(t_philo** philo, t_fork** fork, t_table** table, int n_philos);
 int init_all (t_philo** philosophers, t_table** table, t_fork** forks, int input_num_of_philo);
-void final_init_table(t_table* table, int argc, char** argv, t_philo** philosophers);
+void final_init_table(t_table* table, int argc, char** argv);
 
 #endif

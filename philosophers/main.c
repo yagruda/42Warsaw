@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 13:55:01 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/22 15:05:04 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/22 16:20:08 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int main(int argc, char** argv)
 
 	if (init_all(&philosophers, &table, &forks, input_num_of_philo))
 		return 1;
-	final_init_table(table, argc, argv, &philosophers);
+	final_init_table(table, argc, argv);
 
 	pthread_create(&supervisor, NULL, supervisor_fn, table);
 	join_all_threads(philosophers, supervisor, input_num_of_philo);
