@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 18:35:15 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/20 17:58:00 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/22 13:11:38 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int init_all (t_philo** philosophers, t_table** table, t_fork** forks, int input
 }
 
 // TBD, it's basic version
+// ad a check case for max number of philos - 250
 int input_check(int argc, char** argv)
 {
 	if (argc < 2)
@@ -32,7 +33,7 @@ int input_check(int argc, char** argv)
 		return -1;
 	}
 	
-	// if > 200 philosophers, return error
+	// if > 250 philosophers, return error
 	// TBD: what's about wrong input - not a number?
 	return (ft_atoi(argv[1]));
 }
@@ -59,9 +60,9 @@ void init_forks_filos(t_philo *philosophers, t_fork *forks, int n_philos, t_tabl
 void init_table(t_table* table, t_philo* philosophers, t_fork* forks, int n_philos)
 {
 	table->num_of_philo = n_philos;
-	table->time_to_die = 1000; // how much time has to pass since last meal to die
-	table->time_to_eat = 600; // how much time it takes to eat in ms = how much time philo holds 2 forks
-	table->time_to_sleep = 500; // how much time philo do nothing after eating (even not trying to take forks)
+	table->time_to_die = 400; // how much time has to pass since last meal to die
+	table->time_to_eat = 200; // how much time it takes to eat in ms = how much time philo holds 2 forks
+	table->time_to_sleep = 200; // how much time philo do nothing after eating (even not trying to take forks)
 	table->num_must_eat = -1; // -1 means no limit
 	table->start_time = ft_time_in_ms();
 	table->simulation_should_end = 0;

@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 13:55:01 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/20 17:59:42 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/22 13:04:50 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,60 @@
 #include <stdint.h> // for uint64_t
 
 
-// ad a check case for max number of philos - 250
-int main(int argc, char** argv)
-{	
-	int input_num_of_philo; // transfer to table, so work without it in main
+static void cleanup_resources(t_philo *philosophers, t_fork *forks, t_table *table)
+{
 	int i;
-	t_fork* forks;
-	t_philo* philosophers;
-	pthread_t supervisor;
-	t_table* table;
 
 	i = 0;
-	input_num_of_philo = input_check(argc, argv);	
-	if(input_num_of_philo < 2)
-		return 1;
-
-	// maybe change input_num_of_philo to argv and assign num of philo inside init all
-	if (init_all(&philosophers, &table, &forks, input_num_of_philo))
-		return 1;
+	while (i < table->num_of_philo)
+	{
+		pthread_mutex_destroy(&forks[i].mutex);
+		i++;
+	}
 	
-	pthread_create(&supervisor, NULL, supervisor_fn, table);
-	while (i < input_num_of_philo)
+	pthread_mutex_destroy(&table->table_lock);
+	free(forks);
+	free(philosophers);
+	free(table);
+}
+
+static void join_all_threads(t_philo *philosophers, pthread_t supervisor, int n_philos)
+{
+	int i;
+
+	i = 0;
+
+	while (i < n_philos)
 	{
 		pthread_join(philosophers[i].thread_handle, NULL);
 		i++;
 	}
 	pthread_join(supervisor, NULL);
 	
-	free(forks);
-	free(philosophers);
-	free(table);
+}
+
+int main(int argc, char** argv)
+{	
+	int input_num_of_philo; // transfer to table, so work without it in main
+	t_fork* forks;
+	t_philo* philosophers;
+	pthread_t supervisor;
+	t_table* table;
+
+	input_num_of_philo = input_check(argc, argv);	
+	if(input_num_of_philo < 2)
+		return 1;
+
+	if (init_all(&philosophers, &table, &forks, input_num_of_philo))
+		return 1;
+	
+	pthread_create(&supervisor, NULL, supervisor_fn, table);
+	join_all_threads(philosophers, supervisor, input_num_of_philo);
+
+	cleanup_resources(philosophers, forks, table);
 
 	return 0;
 }
+
+
 
