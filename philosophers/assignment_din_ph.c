@@ -6,11 +6,45 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 12:58:11 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/23 14:50:46 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/23 15:04:47 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int	ft_atoi(const char *str)
+{
+	int	sign;
+	int	number;
+
+	sign = 1;
+	number = 0;
+	while ((*str >= 9 && *str <= 13) || *str == 32)
+	{
+		str++;
+	}
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (*str >= 48 && *str <= 57)
+	{
+		number *= 10;
+		number += *str - 48;
+		++str;
+	}
+	return (number * sign);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
+}
 
 // we transfer t_fork *fork as an argument to avoid using global variables
 

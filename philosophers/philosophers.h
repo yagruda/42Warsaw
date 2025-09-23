@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 13:54:07 by yhruda            #+#    #+#             */
-/*   Updated: 2025/09/23 14:50:35 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/09/23 15:04:57 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 # define PHILOSOPHERS_H
 
 // include Libft inside
-# include "Includes/ft_printf.h"
+//# include "Includes/ft_printf.h"
 # include <pthread.h>
 # include <stdint.h>
 # include <stdio.h>
+# include <stdlib.h>
 # include <sys/time.h>
+# include <unistd.h>
 // stdint for uint64_t
 
 typedef struct s_philo
@@ -90,5 +92,7 @@ int						structures_malloc(t_philo **philo, t_fork **fork,
 int						init_all(t_philo **philosophers, t_table **table,
 							t_fork **forks, int input_num_of_philo);
 void					final_init_table(t_table *table, int argc, char **argv);
+int						ft_atoi(const char *str);
+int						ft_isdigit(int c);
 
 #endif
