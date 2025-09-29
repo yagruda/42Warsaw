@@ -1,0 +1,6 @@
+First line
+Second line with text
+Third line
+
+Empty line above
+Last line without newline
