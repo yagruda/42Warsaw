@@ -89,6 +89,9 @@ cba$
 #include "stdio.h"
 #include <stdlib.h>
 
+char** permutations;
+int perm_count = 0;
+
 void swap(char* a, char* b)
 {
 	char temp = *a;
@@ -96,50 +99,7 @@ void swap(char* a, char* b)
 	*b = temp;
 }
 
-void sort_substring(char* str, int start, int end)
-{
-	int i = start;
-	int j = start;
-	char temp;
 
-	while (i < end)
-	{
-		while (j < end - (i - start))
-		{
-			if (str[j] > str[j + 1])
-			{
-				temp = str[j];
-				str[j] = str[j + 1];
-				str[j + 1] = temp;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
-void permutation (char* str, int l, int r)
-{
-	int i;
-
-	i = l;
-	
-	if (l == r)
-	{
-		puts(str);
-	}
-	else
-	{
-		sort_substring(str, l, r);
-		while (i <= r)
-		{
-			swap(&str[i], &str[l]);
-			permutation(str, l+1, r);
-			swap(&str[i], &str[l]);
-			i++;
-		}
-	}
-}
 int ft_strlen(char* str)
 {
 	int i = 0;
@@ -150,6 +110,57 @@ int ft_strlen(char* str)
 	}
 
 	return i;
+}
+
+void permutation (char* str, int l, int r)
+{
+	int i;
+	int len;
+
+	i = l;
+	
+	if (l == r)
+	{
+		len = ft_strlen(str);
+		int j = 0;
+		permutations[perm_count] = malloc(len + 1);
+		while (j < len)
+		{
+			permutations[perm_count][j] = str[j];
+			j++;
+		}
+		permutations[perm_count][j] = '\0';
+		perm_count++;
+	}
+	else
+	{
+		while (i <= r)
+		{
+			swap(&str[i], &str[l]);
+			permutation(str, l+1, r);
+			swap(&str[i], &str[l]);
+			i++;
+		}
+	}
+}
+int factorial(int n)
+{
+	if (n <= 1)
+		return 1;
+	return n * factorial(n - 1);
+}
+
+int ft_strcmp(char* s1, char* s2)
+{
+	int i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return s1[i] - s2[i];
+}
+
+int compare_strings(const void* a, const void* b)
+{
+	return ft_strcmp(*(char**)a, *(char**)b);
 }
 
 int main(int argc, char** argv)
@@ -195,13 +206,45 @@ int main(int argc, char** argv)
 		i++;
 	}
 
+
+
+
+
+	// Allocate array for storing permutations
+	int total_perms = factorial(len);
+	permutations = malloc(total_perms * sizeof(char*));
+	
+	// Generate all permutations
 	permutation(s_buff, 0, len-1);
 
-	//swap((s_buff + len - 1), (s_buff + len - 2)); same as swap(s_buff[len-1], s_buff[len-2]);
-	//swap(&s_buff[len-1], &s_buff[len-2]);
 
+
+
+
+	
+	// Sort permutations alphabetically (bubble sort)
+	for (i = 0; i < perm_count - 1; i++)
+	{
+		for (j = 0; j < perm_count - 1 - i; j++)
+		{
+			if (ft_strcmp(permutations[j], permutations[j + 1]) > 0)
+			{
+				char* temp_str = permutations[j];
+				permutations[j] = permutations[j + 1];
+				permutations[j + 1] = temp_str;
+			}
+		}
+	}
+	
+	// Print sorted permutations
+	for (i = 0; i < perm_count; i++)
+	{
+		puts(permutations[i]);
+		free(permutations[i]);
+	}
+	
+	free(permutations);
 	free(s_buff);
-
 
 	return 0;
 }
