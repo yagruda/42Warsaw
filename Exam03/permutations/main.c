@@ -109,6 +109,9 @@ int main(int argc, char** argv)
 	ft_bubble_sort(argv[1], len);
 	
 	permutation(len, argv[1], current, is_used, 0);
+
+	free(is_used);
+	free(current);
 	
 	return 0;
 }
