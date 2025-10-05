@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -45,3 +46,10 @@ int main(int ac, char **av)
     free(b);
     return (0);
 }
+=======
+/*
+
+
+
+*/
+>>>>>>> 29fa19a64435e984ab9aeb8c2344b8611d61766c

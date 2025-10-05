@@ -28,6 +28,7 @@ cab$
 cba$
 */
 
+<<<<<<< HEAD
 #include "unistd.h"
 #include "stdio.h"
 #include <stdlib.h>
@@ -38,20 +39,39 @@ void swap(char* a, char* b)
 	*a = *b;
 	*b = temp;
 }
+=======
+
+/*
+ * EXECUTION EXAMPLE:
+ * 
+ * ./permutations abc
+ * abc
+ * acb  
+ * bac
+ * bca
+ * cab
+ * cba
+ 
+ */
+
+
+
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+>>>>>>> 29fa19a64435e984ab9aeb8c2344b8611d61766c
 
 int ft_strlen(char* str)
 {
-	int i = 0;
-
-	while (str[i])
-	{
-		i++;
-	}
-
-	return i;
+	int len = 0;
+	while (str[len])
+		len++;
+	return len;
 }
 void sort_str(char* str, int len);
 
+<<<<<<< HEAD
 void permutation(char* str, int len, int step)
 {
 	if (step == len)
@@ -95,6 +115,63 @@ int main(int argc, char** argv)
 
 	// Generate and print all permutations
 	permutation(input, len - 1, 0);
+=======
+void ft_bubble_sort(char* arr, int size)
+{
+	char temp;
+	for (int i = 0; i < size - 1; i++)
+	{
+		for (int j = 0; j < size - 1 - i; j++)
+		{
+			if (arr[j] > arr[j + 1])
+			{
+				temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+		}
+	}
+}
 
+void permutation(int len, char* orig, char* current, int* is_used, int step)
+{
+	if (step == len)
+	{
+		current[step] = '\0';
+		puts(current);
+	}
+	else
+	{
+		for(int i = 0; i < len; i++)
+			if(!is_used[i])
+			{
+				is_used[i] = 1;
+				current[step] = orig[i]; 
+				permutation(len,orig,current,is_used, step + 1);
+				is_used[i] = 0;
+			}
+	}
+
+	return;
+}
+int main(int argc, char** argv)
+{
+	if (argc != 2)
+		return 1;
+	
+	int len = ft_strlen(argv[1]);
+	int* is_used = calloc(len, sizeof(char) * len);
+	char* current = malloc(sizeof(char) * len);
+	if (!current || !is_used)
+		return 1;
+	
+	ft_bubble_sort(argv[1], len);
+	
+	permutation(len, argv[1], current, is_used, 0);
+>>>>>>> 29fa19a64435e984ab9aeb8c2344b8611d61766c
+
+	free(is_used);
+	free(current);
+	
 	return 0;
 }
