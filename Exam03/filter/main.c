@@ -18,28 +18,37 @@
 // If the program is called whitout argument or with an empty argument or with
 // multiples arguments it must return 1.
 
-#include <string.h>
-#include <unistd.h>
-#include <stdio.h>
-
 #ifndef BUFFER_SIZE
-#define BUFFER_SIZE 10 
+#define BUFFER_SIZE 10
 #endif
 
-void ft_filter(char* str, char* chn)
+
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+int ft_strlen(char* str)
+{
+	int i = 0;
+	while (str[i])
+		i++;
+	return i;
+}
+
+void filter (char* buffer, char* istr)
 {
 	int i = 0;
 	int k = 0;
-	int len = strlen(chn);
-	while (str[i])
+	int len = ft_strlen(istr);
+
+	while (buffer[i])
 	{
-		while (str[i + k] == chn[k])
-		{
+		k = 0;
+		while (buffer[i + k] == istr[k])
 			k++;
-		}
 		if (len == k)
 		{
-			while(k > 0 && str[i] != '\0')
+			while (k > 0)
 			{
 				write(1, "*", 1);
 				k--;
@@ -48,37 +57,30 @@ void ft_filter(char* str, char* chn)
 		}
 		else
 		{
-			write(1, &str[i], 1);
+			write(1, &buffer[i], 1);
 			i++;
 		}
-		
 	}
+
 }
 
 int main(int argc, char** argv)
 {
+	if (argc < 2)
+		return 1;
+	
 	int i = 0;
 	int r = 1;
-	char buffer[99999];
-
-	if (argc < 2)
-		return 0;
+	char buffer[999];
 
 	while (r > 0)
 	{
-		r = read(0, &buffer[i], BUFFER_SIZE);
-		if (r == -1)
-		{
-			perror("Error: ");
-			return 1;
-		}
+		r = read(0, &buffer[i], 10);
 		i += r;
 	}
 	buffer[i] = '\0';
 
-	ft_filter(buffer, argv[1]);
+	filter(buffer, argv[1]);
 
-	//printf("buffer %s", buffer);
-	
 	return 0;
 }
