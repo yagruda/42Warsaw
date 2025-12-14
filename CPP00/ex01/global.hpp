@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
+#include <limits>
 
 typedef std::string string;
 

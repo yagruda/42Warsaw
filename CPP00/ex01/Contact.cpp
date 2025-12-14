@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:49:57 by yhruda            #+#    #+#             */
-/*   Updated: 2025/12/02 22:37:57 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/12/14 14:14:12 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ Contact::~Contact()
 
 void Contact::showContact()
 {
-	std::cout << this->index << this->first_name << this->last_name << this->nick_name;
+	std::cout << this->index << '\n' << this->first_name << '\n' << this->last_name << '\n' << this->nick_name <<std::endl;
 }
