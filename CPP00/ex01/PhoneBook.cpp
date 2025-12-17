@@ -13,9 +13,7 @@
 /*
 Write class names in UpperCamelCase format. Files containing class code will
 always be named according to the class name. For instance:
-ClassName.hpp/ClassName.h, ClassName.cpp, or ClassName.tpp. Then, if you
-have a header file containing the definition of a class "BrickWall" standing for a
-brick wall, its name will be BrickWall.hpp
+
 
 Unless specified otherwise, every output message must end with a newline character
 and be displayed to the standard output.
