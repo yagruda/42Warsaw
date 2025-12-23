@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 14:49:59 by yhruda            #+#    #+#             */
-/*   Updated: 2025/12/16 16:30:22 by yhruda           ###   ########.fr       */
+/*   Created: 2025/01/05 16:28:14 by yhruda            #+#    #+#             */
+/*   Updated: 2025/01/05 16:54:53 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "global.hpp"
+#include "libft.h"
 
-// TBD: can store maximum 8 contacts. If tries to add 9th - replace the oldest one (the one at the beggining of a stack)
-class PhoneBook
+void	ft_putchar_fd(char c, int fd)
 {
-	public:
-		Contact arr_contacts[8]; // Transfer to private at the end
-		PhoneBook(); 
-		void addContact(int i);
-		void searchContacts();
-};
-
-
-//Truncate adn Replace Transfer Here from main
+	write(fd, &c, 1);
+}
+/*
+int	main(void)
+{
+	// Example 1: Write to standard output
+	ft_putchar_fd('H', 1); // Prints: H
+	ft_putchar_fd('\n', 1); // Prints: (newline)
+	// Example 2: Write to standard error
+	ft_putchar_fd('E', 2); // Prints: E to stderr
+	ft_putchar_fd('\n', 2); // Prints: (newline) to stderr
+	return(0);
+}*/

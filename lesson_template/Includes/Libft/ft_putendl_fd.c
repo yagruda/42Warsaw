@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 14:49:59 by yhruda            #+#    #+#             */
-/*   Updated: 2025/12/16 16:30:22 by yhruda           ###   ########.fr       */
+/*   Created: 2025/01/05 16:29:25 by yhruda            #+#    #+#             */
+/*   Updated: 2025/01/05 16:54:55 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "global.hpp"
+#include "libft.h"
 
-// TBD: can store maximum 8 contacts. If tries to add 9th - replace the oldest one (the one at the beggining of a stack)
-class PhoneBook
+void	ft_putendl_fd(char *s, int fd)
 {
-	public:
-		Contact arr_contacts[8]; // Transfer to private at the end
-		PhoneBook(); 
-		void addContact(int i);
-		void searchContacts();
-};
+	int	i;
 
-
-//Truncate adn Replace Transfer Here from main
+	i = 0;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+	write(fd, "\n", 1);
+}
+/*
+int	main(void) {
+	// Example 1: Write to standard output
+	ft_putendl_fd("Hello, world!", 1);
+	// Example 2: Write to standard error
+	ft_putendl_fd("This is an error message.", 2);
+	return (0);
+}*/

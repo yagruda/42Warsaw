@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 14:49:59 by yhruda            #+#    #+#             */
-/*   Updated: 2025/12/16 16:30:22 by yhruda           ###   ########.fr       */
+/*   Created: 2024/12/21 11:37:29 by yhruda            #+#    #+#             */
+/*   Updated: 2025/01/05 17:00:36 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "global.hpp"
+#include "libft.h"
 
-// TBD: can store maximum 8 contacts. If tries to add 9th - replace the oldest one (the one at the beggining of a stack)
-class PhoneBook
+int	ft_toupper(int c)
 {
-	public:
-		Contact arr_contacts[8]; // Transfer to private at the end
-		PhoneBook(); 
-		void addContact(int i);
-		void searchContacts();
-};
+	if (c > 96 && c < 123)
+		c -= 32;
+	return (c);
+}
 
-
-//Truncate adn Replace Transfer Here from main
+/* int main()
+{
+	printf("%c", ft_toupper('2'));
+	return (0);
+} */

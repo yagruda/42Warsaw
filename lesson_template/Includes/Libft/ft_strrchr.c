@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 14:49:59 by yhruda            #+#    #+#             */
-/*   Updated: 2025/12/16 16:30:22 by yhruda           ###   ########.fr       */
+/*   Created: 2024/12/21 12:16:35 by yhruda            #+#    #+#             */
+/*   Updated: 2025/01/05 16:59:10 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "global.hpp"
+#include "libft.h"
 
-// TBD: can store maximum 8 contacts. If tries to add 9th - replace the oldest one (the one at the beggining of a stack)
-class PhoneBook
+char	*ft_strrchr(const char *s, int c)
 {
-	public:
-		Contact arr_contacts[8]; // Transfer to private at the end
-		PhoneBook(); 
-		void addContact(int i);
-		void searchContacts();
-};
+	char	*result;
 
+	result = NULL;
+	while (*s != '\0')
+	{
+		if (*s == (char)(c))
+			result = (char *)s;
+		s++;
+	}
+	if (c == '\0' && *s == '\0')
+		return ((char *)s);
+	return (result);
+}
 
-//Truncate adn Replace Transfer Here from main
+/* int main()
+{
+	char* str = "Hello";
+	printf("%s\n", ft_strchr(str, 'p'));
+	printf("%s\n", strrchr(str, 'p'));
+	return (0);
+} */

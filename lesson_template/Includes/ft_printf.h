@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 14:49:59 by yhruda            #+#    #+#             */
-/*   Updated: 2025/12/16 16:30:22 by yhruda           ###   ########.fr       */
+/*   Created: 2025/01/10 13:44:23 by yhruda            #+#    #+#             */
+/*   Updated: 2025/09/05 11:49:39 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "global.hpp"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-// TBD: can store maximum 8 contacts. If tries to add 9th - replace the oldest one (the one at the beggining of a stack)
-class PhoneBook
-{
-	public:
-		Contact arr_contacts[8]; // Transfer to private at the end
-		PhoneBook(); 
-		void addContact(int i);
-		void searchContacts();
-};
+# include "Libft/libft.h"
+# include <stdarg.h>
 
+int	print_char(int c);
+int	print_str(char *str);
+int	print_digit(unsigned long num, int base, int isUpperCase);
+int	print_signed_digit(long num, int base);
+int	print_ptr(void *ptr);
+int	print_format(char specifier, va_list *ap);
+int	ft_printf(const char *format, ...);
 
-//Truncate adn Replace Transfer Here from main
+#endif

@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 14:49:59 by yhruda            #+#    #+#             */
-/*   Updated: 2025/12/16 16:30:22 by yhruda           ###   ########.fr       */
+/*   Created: 2024/12/25 11:14:46 by yhruda            #+#    #+#             */
+/*   Updated: 2025/01/06 14:29:42 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "global.hpp"
+#include "libft.h"
 
-// TBD: can store maximum 8 contacts. If tries to add 9th - replace the oldest one (the one at the beggining of a stack)
-class PhoneBook
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	public:
-		Contact arr_contacts[8]; // Transfer to private at the end
-		PhoneBook(); 
-		void addContact(int i);
-		void searchContacts();
-};
+	void	*arr;
+	size_t	arr_length;
 
+	if (nmemb != 0 && size != 0 && (nmemb * size) / nmemb != size)
+		return (NULL);
+	arr_length = nmemb * size;
+	if (nmemb == 0 || size == 0)
+		arr_length = 1;
+	arr = malloc(arr_length);
+	if (!arr)
+		return (NULL);
+	ft_memset(arr, 0, arr_length);
+	return (arr);
+}
 
-//Truncate adn Replace Transfer Here from main
+/* int main()
+{
+	ft_calloc(5, 10);
+	return (0);
+} */
