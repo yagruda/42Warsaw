@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   newZombie.cpp                                      :+:      :+:    :+:   */
+/*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/16 16:50:59 by yhruda            #+#    #+#             */
-/*   Updated: 2025/12/23 18:17:51 by yhruda           ###   ########.fr       */
+/*   Created: 2025/12/29 14:04:19 by yhruda            #+#    #+#             */
+/*   Updated: 2025/12/29 14:43:32 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef Weapon_HPP
+#define Weapon_HPP
 
-/*
-This function creates a zombie, names it, and returns it so you can use it outside
-of the function scope
-*/
+#include <iostream>
 
-Zombie* newZombie(string name)
+class Weapon
 {
-	Zombie *zombik;
-	zombik = new Zombie(name);
-	
-	
-	return zombik;
-}
+	private:
+		std::string type;
+	public:
+		Weapon();
+		std::string getType();
+		void setType(std::string);
+		
+};
+
+#include "HumanA.hpp"
+#include "HumanB.hpp"
+
+#endif

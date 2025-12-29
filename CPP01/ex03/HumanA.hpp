@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zombieHorde.cpp                                    :+:      :+:    :+:   */
+/*   HumanA.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/16 16:32:05 by yhruda            #+#    #+#             */
-/*   Updated: 2025/12/29 13:47:25 by yhruda           ###   ########.fr       */
+/*   Created: 2025/12/29 14:03:04 by yhruda            #+#    #+#             */
+/*   Updated: 2025/12/29 14:43:09 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef HumanA_hpp
+#define HumanA_HPP
 
-Zombie* zombieHorde( int N, std::string name )
+class HumanA
 {
-	Zombie *zombiesArr = new Zombie[N];
+	private:
+		std::string _name;
+		Weapon* _weapon;
+	public:
+		void attack(void);
+		HumanA(Weapon);
+		
+};
 
-	for (int i = 0; i < N; i++)
-	{
-		zombiesArr[i].setName(name);
-	}
-
-	return zombiesArr;
-}
-
+#endif

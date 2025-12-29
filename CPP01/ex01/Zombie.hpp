@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 16:32:10 by yhruda            #+#    #+#             */
-/*   Updated: 2025/12/23 18:15:41 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/12/29 14:16:26 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <string>
 #include <iostream>
+#include 
 
 typedef std::string string;
 
@@ -26,10 +27,10 @@ class Zombie {
 		Zombie(string name);
 		Zombie();
 		void announce(void);
+		void setName(std::string newName);
 };
 	
-Zombie* newZombie(string name); // dynamic (heap) memory allocation
-void randomChump(string name); // put on stack, call announce
+
 Zombie* zombieHorde( int N, std::string name ); //ex01
 
 #endif

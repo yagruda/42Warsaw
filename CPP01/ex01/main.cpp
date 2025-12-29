@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/29 13:47:15 by yhruda            #+#    #+#             */
+/*   Updated: 2025/12/29 13:47:27 by yhruda           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*
 Time to create a horde of Zombies!
 Implement the following function in the appropriate file:
@@ -16,6 +28,14 @@ leaks.
 
 int main()
 {
-	zombieHorde(5, "Vasya");
+	Zombie* zombiesArr = zombieHorde(5, "Vasya");
+	
+	for (int i = 0; i < 5; i++)
+	{
+		zombiesArr[i].announce();
+	}
+
+	delete[] zombiesArr;
+
 	return 0;
 }
