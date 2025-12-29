@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 14:04:19 by yhruda            #+#    #+#             */
-/*   Updated: 2025/12/29 14:43:32 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/12/29 15:15:22 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@
 
 class Weapon
 {
-	private:
-		std::string type;
 	public:
+		std::string _type;
+		
 		Weapon();
-		std::string getType();
+		Weapon(std::string type);
+		
 		void setType(std::string);
+		const std::string& getType(void); // return reference, not copy. Use CONST so it can't get changed by example obj.getType = "knife"; 
 		
 };
 
