@@ -6,11 +6,11 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:09:34 by yhruda            #+#    #+#             */
-/*   Updated: 2026/01/05 18:12:09 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/01/05 18:14:41 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int main()
 {
