@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 18:15:34 by yhruda            #+#    #+#             */
-/*   Updated: 2026/01/02 19:54:42 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/01/02 21:20:56 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ class Fixed
 		static const int _frbits = 8;
 	public:
 		Fixed(void);
+		Fixed(const int raw);
 		Fixed(const Fixed& ex);
 		Fixed &operator=(const Fixed& ex);
 		~Fixed(void);

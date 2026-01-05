@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 18:15:32 by yhruda            #+#    #+#             */
-/*   Updated: 2026/01/02 19:56:40 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/01/02 21:21:56 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ Fixed::Fixed(void)
 {
 	std::cout << "Default constructor called" << std::endl;
 	this->_fipnum = 0;
+	return;
+}
+Fixed::Fixed(const int raw)
+{
+	std::cout << "const int raw constructor called" << std::endl;
+	
+	// convert int to fixed point
 	return;
 }
 
