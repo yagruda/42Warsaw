@@ -6,13 +6,12 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:09:29 by yhruda            #+#    #+#             */
-/*   Updated: 2026/01/05 18:11:26 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/01/05 18:15:31 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-// TBD: implement the ClapTrap class methods
 ClapTrap::ClapTrap() : _hitpoints(10), _energypoints(10), _attackdamage(0)
 {
 	std::cout << "ClapTrap default constructor called" << std::endl;

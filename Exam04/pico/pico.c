@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 /*
 Allowed functions:	close, fork, wait, exit, execvp, dup2, pipe
@@ -29,18 +30,6 @@ execvp() заменяет текущий процесс на новую прог
 int main(int argc, char** argv)
 {
 
-	int fd[2];
-	pipe(fd);
 
-	if (argc < 2)
-	{
-		write(1, "Usage: ./picoshell <command>\n", 29);
-		return 1;
-	}
-
-
-	char *const cmds[] = {"ls", "|", "grep", "test", NULL};
-
-	execvp("/bin/ls", cmds);
 	return 0;
 }
