@@ -62,87 +62,59 @@ int expect(char **s, char c)
     return (0);
 }
 
-//...
+node *parse_addition(char** s);
 
-node* parse_addition(char** s);
-
-node* parse_term(char** s)
+node* parse_term(char **s)
 {
-    node* ret;
 
-    if (isnumber(**s))
+    if (isdigit(**s))
     {
+
         node n = {.type = VAL, .val = **s - '0', .l = NULL, .r = NULL};
-        ret = new_node(n);
+        node *ret =  new_node(n);
         (*s)++;
         if (!ret)
-            return NULL;
-        return ret;
-    }
-    if (expect(s, '('))
-    {
-        ret = parse_addition(s);
-        if (!ret)
-            return NULL;
-        if (!expect(s, ')'))
         {
-            destroy_tree(ret);
-            return NULL;
+            return (NULL);
         }
         return ret;
-        
     }
 
-    // shouldn't run with normal input
-    unexpected(**s);
-    return NULL;
+    // code below run only if unsuccess (still haven't returned)
+    unexpected(**s); 
+    return (NULL);
 }
 
-node* parse_multi(char **s)
+node* parse_addition(char **s)
 {
-    node* ret = parse_term(s);
-
-    while (accept(s, '*'))
-    {
-        node* right = parse_term(s);
-        if (!right)
-            return NULL;
-        node n = {.type = MULTI, .val = 0, .l = ret, .r = right};
-        ret = new_node(n);
-        if (!ret)
-        {
-            destroy_tree(n.l);
-            destroy_tree(n.r);
-            return NULL;
-        }
-    }
-    return ret;
-}
-
-node* parse_addition(char** s)
-{
-    node* ret = parse_multi(s);
-
+    node* left = parse_term(s);
+    // if (!left)
+    //     return NULL;
     while (accept(s, '+'))
     {
-        node* right = parse_multi(s);
+        node *right = parse_addition(s);
         if (!right)
-            return NULL;
-        node n = {.type = ADD, .val = 0, .l = ret, .r = right};
-        ret = new_node(n);
-        if (!ret)
+        {
+            destroy_tree(left);
+            return (NULL);
+        }
+        node n = {.type = ADD, .val = 0, .l = left, .r = right};
+        left = new_node(n);
+        if (!left)
         {
             destroy_tree(n.l);
             destroy_tree(n.r);
             return NULL;
         }
     }
-    return ret;
+    return (left);
 }
 
 node    *parse_expr(char *s)
 {
     node* ret = parse_addition(&s);
+    // if (!ret)
+    //     return NULL;
 
     if (*s) 
     {
@@ -159,11 +131,10 @@ int eval_tree(node *tree)
         case ADD:
             return (eval_tree(tree->l) + eval_tree(tree->r));
         case MULTI:
-            return (eval_tree(tree->l) * eval_tree(tree->r));
+            return 0;
         case VAL:
             return (tree->val);
     }
-
     return 0;
 }
 
@@ -176,6 +147,4 @@ int main(int argc, char **argv)
         return (1);
     printf("%d\n", eval_tree(tree));
     destroy_tree(tree);
-
-    return 0;
 }
