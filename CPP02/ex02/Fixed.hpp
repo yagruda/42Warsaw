@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 18:15:34 by yhruda            #+#    #+#             */
-/*   Updated: 2026/01/03 14:47:37 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/15 15:58:55 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,17 @@ class Fixed
 		
 		// increment / decrement operators
 
-		Fixed operator++();
-		Fixed operator--();
+		Fixed &operator++();
+		Fixed &operator--();
 		Fixed operator++(int);
 		Fixed operator--(int);
 
 		// 4 static member functions. Static because Fixed::min(a,b) makes sense without an object instance e.g a.min(c,b).
 
-		static Fixed min(Fixed &first, Fixed &second);
-		static const Fixed min(const Fixed &first, const Fixed &second);
-		static Fixed max(Fixed &first, Fixed &second);
-		static const Fixed max(const Fixed &first, const Fixed &second);
+		static Fixed &min(Fixed &first, Fixed &second);
+		static const Fixed &min(const Fixed &first, const Fixed &second);
+		static Fixed &max(Fixed &first, Fixed &second);
+		static const Fixed &max(const Fixed &first, const Fixed &second);
 		
 };
 

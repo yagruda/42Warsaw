@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 18:15:32 by yhruda            #+#    #+#             */
-/*   Updated: 2026/01/03 14:47:48 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/15 16:11:22 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,15 +159,14 @@ Pre increment increments the value first and then return the object.
 Post increment returns the object first and then increments the value.
 
 The int parameter in the post-increment version is never actually used; it's just a "flag" for the compiler to know which version to call.
-
-
+ 
 */
-Fixed Fixed::operator++()
+Fixed &Fixed::operator++()
 {
 	this->_fipnum++;
 	return *this;
 }
-Fixed Fixed::operator--()
+Fixed &Fixed::operator--()
 {
 	this->_fipnum--;
 	return *this;
@@ -175,23 +174,21 @@ Fixed Fixed::operator--()
 // we increase the value of this object but return the old value (stored in temp)
 Fixed Fixed::operator++(int)
 {
-	Fixed temp;
-	temp = *this; 
+	Fixed temp(*this);
 	this->_fipnum++;
 	return temp;
 }
 
 Fixed Fixed::operator--(int)
 {
-	Fixed temp;
-	temp = *this;
+	Fixed temp(*this);
 	this->_fipnum--;
 	return temp;
 }
 
 // static member functions b.c Fixed::min(a,b) makes sense without an object instance e.g a.min(c,b)
 
-Fixed Fixed::min(Fixed &first, Fixed &second)
+Fixed &Fixed::min(Fixed &first, Fixed &second)
 {
 	if (first < second)
 		return first;
@@ -199,21 +196,21 @@ Fixed Fixed::min(Fixed &first, Fixed &second)
 		return second;
 }
 
-const Fixed Fixed::min(const Fixed &first, const Fixed &second)
+const Fixed &Fixed::min(const Fixed &first, const Fixed &second)
 {
 	if (first < second)
 		return first;
 	else
 		return second;
 }
-Fixed Fixed::max(Fixed &first, Fixed &second)
+Fixed &Fixed::max(Fixed &first, Fixed &second)
 {
 	if (first > second)
 		return first;
 	else
 		return second;
 }
-const Fixed Fixed::max(const Fixed &first, const Fixed &second)
+const Fixed &Fixed::max(const Fixed &first, const Fixed &second)
 {
 	if (first > second)
 		return first;
