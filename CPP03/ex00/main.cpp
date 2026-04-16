@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:09:34 by yhruda            #+#    #+#             */
-/*   Updated: 2026/01/05 17:01:31 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/15 16:58:35 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int main()
 	a.attack("CL-8");
 	a.takeDamage(damage);
 	a.beRepaired(damage);
+	a.takeDamage(91);
 	
 	return 0;
 }

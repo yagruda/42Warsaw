@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 18:13:03 by yhruda            #+#    #+#             */
-/*   Updated: 2026/01/05 18:14:13 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/16 16:29:16 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 
 #include "ScavTrap.hpp"
 
-
+class FragTrap
 
 #endif

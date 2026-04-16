@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:23:43 by yhruda            #+#    #+#             */
-/*   Updated: 2026/01/05 18:08:03 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/16 16:10:21 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,10 @@ ScavTrap::ScavTrap(const ScavTrap& ex) : ClapTrap(ex)
 ScavTrap& ScavTrap::operator=(const ScavTrap& ex)
 {
 	std::cout << "ScavTrap copy assignment operator called" << std::endl;
+	// because ScavTrap doesn't have its own member variables, we can just call the base class assignment operator to copy the inherited members
+	// so we wouldn't make a mess 
 	if (this != &ex)
-	{
-		this->_name = ex._name;
-		this->_hitpoints = ex._hitpoints;
-		this->_energypoints = ex._energypoints;
-		this->_attackdamage = ex._attackdamage;
-	}
+		ClapTrap::operator=(ex); 
 	return (*this);
 }
 
@@ -54,7 +51,11 @@ void ScavTrap::attack(const std::string& target)
 		std::cout << "ScavTrap " << this->_name << " attacks " << target << ", causing " << this->_attackdamage << " points of damage!" << std::endl;
 		this->_energypoints -= 1;
 	}
-	else
+	else if (this->_hitpoints == 0)
+	{
+		std::cout << "ScavTrap " << this->_name << " can't attack because it has no hit points left!" << std::endl;
+	}
+	else if (this->_energypoints == 0)
 	{
 		std::cout << "ScavTrap " << this->_name << " has no energy points left to attack!" << std::endl;
 	}
