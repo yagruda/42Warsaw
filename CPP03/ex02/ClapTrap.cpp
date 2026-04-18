@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:09:29 by yhruda            #+#    #+#             */
-/*   Updated: 2026/04/15 17:20:16 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/18 12:14:16 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,16 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& ex)
 	return (*this);
 }
 
-// The assignment operator copies all member variables from ex into *this
-ClapTrap::ClapTrap(const ClapTrap& ex) : _name(ex._name), _hitpoints(ex._hitpoints), _energypoints(ex._energypoints), _attackdamage(ex._attackdamage)
+ClapTrap::ClapTrap(const ClapTrap& ex)
+	: _name(ex._name), _hitpoints(ex._hitpoints),
+	  _energypoints(ex._energypoints), _attackdamage(ex._attackdamage)
 {
 	std::cout << "ClapTrap copy constructor called" <<  std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "ClapTrap destructor called" << std::endl;
+	std::cout << this->_name << ": ClapTrap destructor called" << std::endl;
 }
 void ClapTrap::attack(const std::string& target)
 {
@@ -74,7 +75,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 	else
 	{
 		if (amount >= this->_hitpoints)
-			this->_hitpoints = 0; // because unsigned int can't be negative
+			this->_hitpoints = 0;
 		else
 			this->_hitpoints -= amount;
 

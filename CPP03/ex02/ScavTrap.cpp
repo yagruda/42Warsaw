@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:23:43 by yhruda            #+#    #+#             */
-/*   Updated: 2026/04/15 17:19:15 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/18 12:09:51 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,23 @@ void ScavTrap::attack(const std::string& target)
 	{
 		std::cout << "ScavTrap " << this->_name << " has no energy points left to attack!" << std::endl;
 	}
+	return;
+}
+
+void ScavTrap::beRepaired(unsigned int amount)
+{
+	if (this->_hitpoints == 0)
+	{
+		std::cout << "ScavTrap " << this->_name << " can't be repaired because it has no hit points left!" << std::endl;
+		return;
+	}
+	if (this->_energypoints == 0)
+	{
+		std::cout << "ScavTrap " << this->_name << " has no energy points left to repair!" << std::endl;
+		return;
+	}
+	this->_energypoints -= 1;
+	this->_hitpoints += amount;
+	std::cout << "ScavTrap " << this->_name << " is repaired by " << amount << " points and now has " << this->_hitpoints << " hitpoints!" << std::endl;
 	return;
 }
