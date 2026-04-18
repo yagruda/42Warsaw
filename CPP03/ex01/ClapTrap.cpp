@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:09:29 by yhruda            #+#    #+#             */
-/*   Updated: 2026/04/15 17:21:59 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/18 12:02:47 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& ex)
 	return (*this);
 }
 
-// The assignment operator copies all member variables from ex into *this
 ClapTrap::ClapTrap(const ClapTrap& ex)
+	: _name(ex._name), _hitpoints(ex._hitpoints),
+	  _energypoints(ex._energypoints), _attackdamage(ex._attackdamage)
 {
-	*this = ex;
 	std::cout << "ClapTrap copy constructor called" <<  std::endl;
 }
 

@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:09:32 by yhruda            #+#    #+#             */
-/*   Updated: 2026/01/05 18:09:29 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/18 11:43:05 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include <iostream>
 
-// TBD: check Is it Orthodox Canonical Form
 class ClapTrap
 {
 	protected:

@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:23:51 by yhruda            #+#    #+#             */
-/*   Updated: 2026/01/05 18:02:05 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/18 11:49:38 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ class ScavTrap : public ClapTrap
 		
 		void guardGate();
 		void attack(const std::string& target);
+		void beRepaired(unsigned int amount); // in subject it's said to change only constructors, destructor, and attack() but let's make things clear
 };
 
 #endif
