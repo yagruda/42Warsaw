@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/18 13:15:26 by yhruda            #+#    #+#             */
-/*   Updated: 2026/04/18 14:35:44 by yhruda           ###   ########.fr       */
+/*   Created: 2026/04/18 13:17:30 by yhruda            #+#    #+#             */
+/*   Updated: 2026/04/19 15:04:32 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-#define ANIMAL_HPP
+#ifndef DOG_HPP
+#define DOG_HPP	
 
-#include <iostream>
+#include "Animal.hpp"
+#include "Brain.hpp"
 
-class Animal
+class Dog: public Animal
 {
-	protected:
-		std::string type;
-
+	private:
+		Brain* brain;
 	public:
-		Animal();
-		Animal(const Animal& ex);
-		Animal& operator=(const Animal& ex);
-		virtual ~Animal(); // for proper destruction order if have any childs
+		Dog();
+		Dog(const Dog& ex);
+		Dog& operator=(const Dog& ex);
+		~Dog();
 		
-		std::string getType() const;
-
-		virtual void makeSound() const;
+		void makeSound() const;
 };
 
 #endif

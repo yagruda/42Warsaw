@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 13:15:26 by yhruda            #+#    #+#             */
-/*   Updated: 2026/04/18 14:35:44 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/19 14:41:25 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class Animal
 		Animal();
 		Animal(const Animal& ex);
 		Animal& operator=(const Animal& ex);
-		virtual ~Animal(); // for proper destruction order if have any childs
+		virtual ~Animal();
 		
 		std::string getType() const;
 

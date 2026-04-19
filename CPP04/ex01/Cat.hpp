@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/18 13:15:26 by yhruda            #+#    #+#             */
-/*   Updated: 2026/04/18 14:35:44 by yhruda           ###   ########.fr       */
+/*   Created: 2026/04/18 13:17:34 by yhruda            #+#    #+#             */
+/*   Updated: 2026/04/19 15:08:18 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-#define ANIMAL_HPP
+#ifndef CAT_HPP
+#define CAT_HPP	
 
-#include <iostream>
+#include "Animal.hpp"
+#include "Brain.hpp"
 
-class Animal
+class Cat: public Animal
 {
-	protected:
-		std::string type;
-
+	private:
+		Brain* brain;
 	public:
-		Animal();
-		Animal(const Animal& ex);
-		Animal& operator=(const Animal& ex);
-		virtual ~Animal(); // for proper destruction order if have any childs
+		Cat();
+		Cat(const Cat& ex);
+		Cat& operator=(const Cat& ex);
+		~Cat();
 		
-		std::string getType() const;
-
-		virtual void makeSound() const;
+		void makeSound() const;
+		void giveIdea(int index);
 };
+
 
 #endif

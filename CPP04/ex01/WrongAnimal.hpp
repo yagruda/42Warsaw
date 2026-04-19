@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/18 13:15:26 by yhruda            #+#    #+#             */
-/*   Updated: 2026/04/18 14:35:44 by yhruda           ###   ########.fr       */
+/*   Created: 2026/04/18 14:49:04 by yhruda            #+#    #+#             */
+/*   Updated: 2026/04/18 15:04:45 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-#define ANIMAL_HPP
+#ifndef WRONGANIMAL_HPP
+#define WRONGANIMAL_HPP
 
 #include <iostream>
 
-class Animal
+class WrongAnimal
 {
 	protected:
 		std::string type;
 
 	public:
-		Animal();
-		Animal(const Animal& ex);
-		Animal& operator=(const Animal& ex);
-		virtual ~Animal(); // for proper destruction order if have any childs
+		WrongAnimal();
+		WrongAnimal(const WrongAnimal& ex);
+		WrongAnimal& operator=(const WrongAnimal& ex);
+		virtual ~WrongAnimal();
 		
 		std::string getType() const;
 
-		virtual void makeSound() const;
+		void makeSound() const;
 };
 
 #endif
