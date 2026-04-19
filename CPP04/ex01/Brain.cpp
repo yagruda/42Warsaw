@@ -4,14 +4,13 @@ Brain::Brain()
 {
 	std::cout << "Brain constructor called" << std::endl;
 	for (int i = 0; i < 100; i++)
-		this->ideas[i] = "Idea " +  std::to_string(i);
+	{
+		this->ideas[i] = "Idea";
+	}
 }
 
 Brain::Brain(const Brain& ex)
 {
-	for (int i = 0; i < 100; i++)
-    	this->ideas[i] = ex.ideas[i];
-
 	*this = ex;
 	std::cout << "Brain copy construct called" << std::endl;
 }

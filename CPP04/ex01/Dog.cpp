@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 13:17:31 by yhruda            #+#    #+#             */
-/*   Updated: 2026/04/19 15:05:45 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/19 15:29:20 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ Dog::Dog() : Animal()
 	this->brain = new Brain();
 	std::cout << "Dog default constructor called" << std::endl;
 }
-Dog::Dog(const Dog& ex) : Animal(ex) // we call the copy constructor of the Animal class to copy the type member variable
+Dog::Dog(const Dog& ex) : Animal(ex), brain(new Brain(*ex.brain))
 {
-	this->type = ex.type; // we copy the type member variable from the Dog class
-	std::cout << "Dog copy constructor called" << std::endl;
+    this->type = ex.type;
+    std::cout << "Dog copy constructor called" << std::endl;
 }
+
 Dog& Dog::operator=(const Dog& ex)
 {
-	std::cout << "Dog copy assignment operator called" << std::endl;
-
-	if (this != &ex)
-	{
-		this->type = ex.type;
-	}
-
-	return (*this);
+    if (this != &ex)
+    {
+        this->type = ex.type;
+        delete this->brain;
+        this->brain = new Brain(*ex.brain);
+    }
+    return (*this);
 }
 Dog::~Dog()
 {

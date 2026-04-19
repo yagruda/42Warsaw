@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 13:17:32 by yhruda            #+#    #+#             */
-/*   Updated: 2026/04/19 15:14:35 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/19 15:29:28 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,21 @@ Cat::Cat() : Animal()
 	this->brain = new Brain();
 	std::cout << "Cat default constructor called" << std::endl;
 }
-Cat::Cat(const Cat& ex) : Animal(ex) // we call the copy constructor of the Animal class to copy the type member variable
+Cat::Cat(const Cat& ex) : Animal(ex), brain(new Brain(*ex.brain))
 {
-	this->type = ex.type; // we copy the type member variable from the Cat class
-	delete this->brain;
-	this->brain = new Brain(*ex.brain);
-	
-	std::cout << "Cat copy constructor called" << std::endl;
+    this->type = ex.type;
+    std::cout << "Cat copy constructor called" << std::endl;
 }
+
 Cat& Cat::operator=(const Cat& ex)
 {
-	std::cout << "Cat copy assignment operator called" << std::endl;
-
-	if (this != &ex)
-	{
-		this->type = ex.type;
-	}
-
-	delete this->brain;
-	this->brain = new Brain(*ex.brain);
-
-	return (*this);
+    if (this != &ex)
+    {
+        this->type = ex.type;
+        delete this->brain;
+        this->brain = new Brain(*ex.brain);
+    }
+    return (*this);
 }
 Cat::~Cat()
 {
