@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 13:51:26 by yhruda            #+#    #+#             */
-/*   Updated: 2026/04/26 16:38:43 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/26 17:44:42 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ int main()
 	try
 	{
 		Bureaucrat a("Pan", 1);
+		Bureaucrat b(a);
+		Bureaucrat c("Kowalski", 3);
+		c = a;
+		std::cout << c.getName() << " bureaucrat grade is " << c.getGrade() << std::endl;
 		a.incrementGrade();
-		
+		std::cout << b << std::endl;
 	}
 	catch(const std::exception& e)
 	{

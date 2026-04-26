@@ -6,14 +6,18 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 13:51:28 by yhruda            #+#    #+#             */
-/*   Updated: 2026/04/26 17:40:51 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/26 17:45:38 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-Please note that exception classes do not have to be designed in
-Orthodox Canonical Form.
-*/
+
+// TBD: Then, add a signForm() member function in the Bureaucrat class. This function must
+// call Form::beSigned() to attempt to sign the form. If the form is signed successfully, it
+// will print something like:
+// <bureaucrat> signed <form>
+// Otherwise, it will print something like:
+// <bureaucrat> couldn’t sign <form> because <reason>.
+// Implement and submit some tests to ensure everything works as expected.
 
 #ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
