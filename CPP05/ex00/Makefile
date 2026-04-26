@@ -1,4 +1,4 @@
-SRC = *.cpp
+SRC = main.cpp Bureaucrat.cpp 
 NAME = app
 CC = c++ -Wall -Wextra -Werror -std=c++98 
 
