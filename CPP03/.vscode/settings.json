@@ -1,8 +1,0 @@
-{
-	"chat.tools.terminal.autoApprove": {
-		"/^pdftotext 'en\\.subject\\.pdf' - \\| sed -n '/CPP 03/,/CPP 04/p'$/": {
-			"approve": true,
-			"matchCommandLine": true
-		}
-	}
-}

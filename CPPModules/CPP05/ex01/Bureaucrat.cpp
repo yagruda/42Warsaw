@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 13:51:30 by yhruda            #+#    #+#             */
-/*   Updated: 2026/04/26 17:43:26 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/30 13:45:42 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ Bureaucrat::Bureaucrat(const std::string name, unsigned int grade): _name(name)
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other._name), _grade(other._grade) {
   std::cout << "Bureaucrat Copy constructor called." << std::endl;
-  *this = other;
-}
+} 
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
   std::cout << "Bureaucrat Copy assignment called." << std::endl;

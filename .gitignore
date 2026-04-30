@@ -1,0 +1,39 @@
+# Executables
+a.out
+*.out
+*.exe
+
+# Object files
+*.o
+*.obj
+
+# Static libraries
+*.a
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Build directories 
+build/
+cmake-build-*/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 42 specific 
+libft.a
+libft/libft.a
+
+# Logs
+*.log
