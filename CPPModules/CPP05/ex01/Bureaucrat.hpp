@@ -6,23 +6,18 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 13:51:28 by yhruda            #+#    #+#             */
-/*   Updated: 2026/04/26 17:45:38 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/30 16:44:28 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-// TBD: Then, add a signForm() member function in the Bureaucrat class. This function must
-// call Form::beSigned() to attempt to sign the form. If the form is signed successfully, it
-// will print something like:
-// <bureaucrat> signed <form>
-// Otherwise, it will print something like:
-// <bureaucrat> couldn’t sign <form> because <reason>.
-// Implement and submit some tests to ensure everything works as expected.
 
 #ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
 
 #include <iostream>
+#include "Form.hpp"
+
+class Form; 
 
 class Bureaucrat
 {
@@ -47,7 +42,6 @@ class Bureaucrat
 		void incrementGrade(); // -- 
 		void decrementGrade(); // ++ 
 
-
 		// by default class inherits from private so we need to specify that we want to inherit from public std::exception!
 		// throw means that this function can throw an exception, but it does not specify which one. It is a way to indicate that the function may throw an exception, but it does not provide any information about the type of exception that may be thrown.
 		// in C++11 and later, the throw() specifier is deprecated and should not be used. Instead, you can use noexcept to indicate that a function does not throw any exceptions.
@@ -59,6 +53,12 @@ class Bureaucrat
 		{
 			const char* what() const throw();
 		};
+
+
+		//ex01 update
+
+		void signForm(Form &form);
+		
 };
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat);

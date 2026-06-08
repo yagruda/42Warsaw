@@ -6,11 +6,13 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 13:51:30 by yhruda            #+#    #+#             */
-/*   Updated: 2026/04/30 16:45:22 by yhruda           ###   ########.fr       */
+/*   Updated: 2026/04/30 17:23:53 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat() : _name("Unamed Bureac"), _grade(150) {
   std::cout << "Bureaucrat Default constructor called." << std::endl;
@@ -77,12 +79,24 @@ const char *Bureaucrat::GradeTooLowException::what() const throw() {
 
 // ex01
 
-void Bureaucrat::signForm(Form &form) {
+void Bureaucrat::signForm(AForm &form) {
   try {
     form.beSigned(*this);
     std::cout << this->getName() << " signed " << form.getName() << std::endl;
   } catch (std::exception &e) {
     std::cout << this->getName() << " couldn't sign " << form.getName()
+              << " because " << e.what() << std::endl;
+  }
+}
+
+// ex02
+
+void Bureaucrat::executeForm(AForm const &form) const {
+  try {
+    form.execute(*this);
+    std::cout << this->getName() << " executed " << form.getName() << std::endl;
+  } catch (std::exception &e) {
+    std::cout << this->getName() << " couldn't execute " << form.getName()
               << " because " << e.what() << std::endl;
   }
 }
